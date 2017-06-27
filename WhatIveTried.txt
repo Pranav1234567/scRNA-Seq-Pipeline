@@ -1,0 +1,46 @@
+I figured out how the raw sequence is translated into fastq files. 
+For the sample I am working with GSE76983, SRR3106546, the left and right
+reads are each 75 bp and are different in nature. The left read consists 
+of an 8 bp cell barcode, followed by 4 bp UMI, a polyT stretch, and some 
+transcript derived bases. The right read is purely transcript derived bases.
+This information is from the sample's page on Gene Expression Omnibus (GEO). 
+
+Other samples may have difference numbers of base pairs for the cell barcode,
+UMI, and polyT. For example, Tata's data consists of a 12 bp cell barcode,
+8 bp UMI and a 15-20 bp polyT. 
+
+The Illumina 5' adapter and T7 promoter is used to bind with corresponding
+base pairs of the Illumina NextSeq500 machine.
+
+I then proceeded to trim the left read fastq file by using fastq-mcf with
+a fasta file consisting of the 96 cell barcodes. Once the cell barcodes
+were removed, I used the command line tool 'sed' to remove the first 4 bp
+of each read to trim off the UMIs. After removing both the barcodes and UMIs
+from the left read, I tried aligning the left and right reads to the genome
+using tophat2.
+
+Tophat2 alignment finished in about 35 minutes. This is the result of 
+the alignment: 
+
+Left reads:
+          Input     :    944758
+           Mapped   :      1653 ( 0.2% of input)
+            of these:         2 ( 0.1%) have multiple alignments (12 have >1)
+Right reads:
+          Input     :    944758
+           Mapped   :    217636 (23.0% of input)
+            of these:         2 ( 0.0%) have multiple alignments (4 have >1)
+Unpaired reads:
+          Input     :      7613
+           Mapped   :      1754 (23.0% of input)
+11.7% overall read mapping rate.
+
+Aligned pairs:       402
+     of these:         2 ( 0.5%) have multiple alignments
+                     399 (99.3%) are discordant alignments
+ 0.0% concordant pair alignment rate. 
+
+In addition to this, I have tried to write the beginning of a bash script.
+
+
+
