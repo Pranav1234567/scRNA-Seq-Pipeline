@@ -1,0 +1,29 @@
+
+[2017-07-12 09:30:52] Beginning TopHat run (v2.0.14)
+-----------------------------------------------
+[2017-07-12 09:30:52] Checking for Bowtie
+		  Bowtie version:	 2.3.2.0
+[2017-07-12 09:30:52] Checking for Bowtie index files (genome)..
+[2017-07-12 09:30:52] Checking for reference FASTA file
+[2017-07-12 09:30:52] Generating SAM header for /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome
+[2017-07-12 09:31:00] Reading known junctions from GTF file
+[2017-07-12 09:31:05] Preparing reads
+	 left reads: min. length=71, max. length=76, 4427 kept reads (30 discarded)
+[2017-07-12 09:31:06] Building transcriptome data files /Users/Pranav/Documents/Research/AnalysisResults/Align/cell85/tmp/genes
+[2017-07-12 09:31:25] Building Bowtie index from genes.fa
+[2017-07-12 09:36:45] Mapping left_kept_reads to transcriptome genes with Bowtie2 
+[2017-07-12 09:36:47] Resuming TopHat pipeline with unmapped reads
+[2017-07-12 09:36:47] Mapping left_kept_reads.m2g_um to genome genome with Bowtie2 
+[2017-07-12 09:36:55] Mapping left_kept_reads.m2g_um_seg1 to genome genome with Bowtie2 (1/3)
+[2017-07-12 09:37:04] Mapping left_kept_reads.m2g_um_seg2 to genome genome with Bowtie2 (2/3)
+[2017-07-12 09:37:13] Mapping left_kept_reads.m2g_um_seg3 to genome genome with Bowtie2 (3/3)
+[2017-07-12 09:37:21] Retrieving sequences for splices
+[2017-07-12 09:38:56] Indexing splices
+[2017-07-12 09:39:07] Mapping left_kept_reads.m2g_um_seg1 to genome segment_juncs with Bowtie2 (1/3)
+[2017-07-12 09:39:09] Mapping left_kept_reads.m2g_um_seg2 to genome segment_juncs with Bowtie2 (2/3)
+[2017-07-12 09:39:11] Mapping left_kept_reads.m2g_um_seg3 to genome segment_juncs with Bowtie2 (3/3)
+[2017-07-12 09:39:14] Joining segment hits
+[2017-07-12 09:40:45] Reporting output tracks
+-----------------------------------------------
+[2017-07-12 09:42:15] A summary of the alignment counts can be found in /Users/Pranav/Documents/Research/AnalysisResults/Align/cell85/align_summary.txt
+[2017-07-12 09:42:15] Run complete: 00:11:23 elapsed

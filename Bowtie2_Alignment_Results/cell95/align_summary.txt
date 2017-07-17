@@ -1,0 +1,4 @@
+Reads:
+          Input     :      4076
+           Mapped   :      1896 (46.5% of input)
+46.5% overall read mapping rate.
