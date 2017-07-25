@@ -1,0 +1,21 @@
+
+#!/bin/bash
+
+DEMUX="/Users/Pranav/Documents/Research/AnalysisResults/Demux"
+REF="/Users/Pranav/Documents/Research/AnalysisResults/Reference"
+ALIGN="/Users/Pranav/Documents/Research/AnalysisResults/Align"
+
+mkdir ${ALIGN}/tophat2
+
+i=47
+while ((i <= 96))
+do
+		for f in $(ls ${DEMUX}/SRR3106546_2/cell.$i.fq)
+		do
+			tophat2 -G ${REF}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf -o ${ALIGN}/tophat2/cell$i --num-threads 16 --transcriptome-max-hits 1 --max-multihits 1 --no-coverage-search --no-novel-juncs ${REF}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome $f 	
+		done	
+((i+=1))
+done
+
+
+

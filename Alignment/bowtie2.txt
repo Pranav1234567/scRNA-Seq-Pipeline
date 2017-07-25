@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DEMUX="/Users/Pranav/Documents/Research/AnalysisResults/Demux"
+REF="/Users/Pranav/Documents/Research/AnalysisResults/Reference"
+ALIGN="/Users/Pranav/Documents/Research/AnalysisResults/Align"
+
+mkdir ${ALIGN}/bowtie2
+
+i=1
+while ((i <= 96))
+do
+                for f in $(ls ${DEMUX}/SRR3106546_2/cell.$i.fq)
+                do
+			mkdir ${ALIGN}/bowtie2/cell$i
+                        bowtie2 -q --local -I 40 -X 100 -t --un ${ALIGN}/bowtie2/cell$i/unaligned.fq --al ${ALIGN}/bowtie2/cell$i/aligned.fq -p 8 --qc-filter -x ${REF}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome -U $f -S ${ALIGN}/bowtie2/cell$i/output.sam 
+                	cd ${ALIGN}/bowtie2/cell$i
+			samtools view -bS output.sam > output.bam
+			bamtools stats -in output.bam > align_summary.txt
+			samtools view -b -F 4 > mapped.bam
+			samtools view -b -f 4 > unmapped.bam
+			rm output.sam
+		done
+((i+=1))
+done

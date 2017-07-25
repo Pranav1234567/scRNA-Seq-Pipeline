@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DEMUX="/Users/Pranav/Documents/Research/AnalysisResults/Demux"
+REF="/Users/Pranav/Documents/Research/AnalysisResults/Reference"
+ALIGN="/Users/Pranav/Documents/Research/AnalysisResults/Align"
+
+mkdir ${ALIGN}/bwa
+
+i=1
+while ((i <= 96))
+do
+                for f in $(ls ${DEMUX}/SRR3106546_2/cell.$i.fq)
+                do
+			cd /Users/Pranav/Documents/Research/AnalysisTools/bwa-0.7.15
+			mkdir ${ALIGN}/bwa/cell$i/
+			./bwa mem -t 16 ${REF}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa ${f} > ${ALIGN}/bwa/cell$i/aln-se.sam
+			samtools view -bS ${ALIGN}/bwa/cell$i/aln-se.sam > ${ALIGN}/bwa/cell$i/aln-se.bam 
+                	bamtools stats -in ${ALIGN}/bwa/cell$i/aln-se.bam > ${ALIGN}/bwa/cell$i/alignment_summary.txt
+			samtools flagstat ${ALIGN}/bwa/cell$i/aln-se.bam > ${ALIGN}/bwa/cell$i/flagstats.txt
+		done
+((i+=1))
+done
+
+
