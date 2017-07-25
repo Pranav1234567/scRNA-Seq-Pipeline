@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DEMUX="/Users/Pranav/Documents/Research/AnalysisResults/Demux"
+
+NUMCELLS=96
+
+i=1
+while ((i<=NUMCELLS))
+do
+	for f in $(ls ${DEMUX}/SRR3106546_2/cell.*$i*.fq)
+	do
+		./fastq-mcf /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa -q 20 -x 0.5 ${f} -o ${DEMUX}/SRR3106546_2/trimCell.*$i*.fq		
+	done
+((i+=1))
+done

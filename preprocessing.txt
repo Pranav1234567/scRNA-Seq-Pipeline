@@ -14,13 +14,12 @@ else
 	ANALYSIS=${PROJ}/Analysis
 
 	RAW=${ANALYSIS}/Raw
-	REF=${ANALYSIS}/Reference
-	TRIM=${ANALYSIS}/Trim
+	TRIM = ${ANALYSIS}/Trim
 	COUNTS=${ANALYSIS}/Counts
 	ALIGN=${ANALYSIS}/Align
 	QC=${ANALYSIS}/QC
 
-	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${REF} ${TRIM} ${COUNTS} ${ALIGN} ${QC}
+	mkdir ${PROJ} ${ANALYSIS} ${TRIM} ${RAW} ${COUNTS} ${ALIGN} ${QC}
 
 	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
         	rawname=`echo $2 | cut -f1 -d'.'`
@@ -38,5 +37,13 @@ else
                 echo "-----------------------------------------"
                 $4 --threads 8 ${rawname}_2.fastq -o ${QC}
                 echo "DONE"
+	
+	#Trimming
+
+ 		#Demultiplex - can write my own barcode file
+			cd $3
+		#	./fastq-multx <barcode file> <input> -o <output '%'>
+		#Adapters	
+			./removeAdapters.txt 				
 fi
 
