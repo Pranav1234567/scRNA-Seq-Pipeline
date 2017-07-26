@@ -1,7 +1,0 @@
-#!/bin/bash
-
-while read p; do
-        grep -o $p firstEight.txt | wc -l >> counts_barcodes.txt
-done <temp3.txt
-
-
