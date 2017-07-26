@@ -14,11 +14,12 @@ else
 	ANALYSIS=${PROJ}/Analysis
 
 	RAW=${ANALYSIS}/Raw
-	TRIM = ${ANALYSIS}/Trim
 	QC=${ANALYSIS}/QC
-	INFO=${ANALYSIS}/INFO
+	INFO=${ANALYSIS}/Info
+	DEMUX=${ANALYSIS}/Demux
+	SCRIPTS="Documents/scripts"
 
-	mkdir ${PROJ} ${ANALYSIS} ${TRIM} ${RAW} ${QC} ${INFO}
+	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX}
 
 	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
         	rawname=`echo $2 | cut -f1 -d'.'`
@@ -36,14 +37,27 @@ else
                 echo "-----------------------------------------"
                 $4 --threads 8 ${rawname}_2.fastq -o ${QC}
                 echo "DONE"
-	
-	#Trimming
 
- 		#Demultiplex
-			# ./extractBarcodes.txt <fastq file containing barcode info> ${INFO} -> where the barcode file will be saved   
-			cd $3
-		#	./fastq-multx <barcode file> <input> -o <output '%'>
-		#Adapters	
-			./removeAdapters.txt 				
+ 	#Demultiplex
+		cd 
+		cd ${SCRIPTS}
+		chmod 777 extractBarcodes.txt
+
+		for f in $(ls ${RAW}/SRR*_1.fastq)
+		do	
+			./extractBarcodes.txt ${f} ${INFO}
+		done   
+		
+		for f in $(ls ${RAW}/SRR*_1.fastq)
+		do
+			for g in $(ls ${RAW}/SRR*_2.fastq)
+			do
+				mkdir ${DEMUX}/read_1/
+				mkdir ${DEMUX}/read_2/
+				fastq-multx ${INFO}/barcodes.tab ${f} ${g} -o ${DEMUX}/read_1/cell.%.fq ${DEMUX}/read_2/cell.%.fq
+			done
+		done
+		 
+	#Trimming Adapters 				
 fi
 
