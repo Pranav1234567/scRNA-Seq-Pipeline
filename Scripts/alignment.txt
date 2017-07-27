@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo "Enter the alignment software that you wish to use (type either bowtie2, bwa, tophat2, hisat2, STAR): "
+
+read alignment
+
+cd Alignment
+
+if [ $alignment == "bowtie2" ]
+	then
+	chmod 777 bowtie2.txt
+	./bowtie2.txt
+elif [ $alignment == "tophat2" ]
+	then
+	chmod 777 tophat2.txt
+	./tophat2.txt
+elif [ $alignment == "bwa" ]
+	then
+	chmod 777 bwa.txt
+	./bwa.txt
+elif [ $alignment == "hisat2" ]
+	then
+	chmod 777
+	./hisat2.txt
+elif [ $alignment == "STAR" ]
+	then
+	chmod 777
+	./STAR.txt
+else 
+	echo "please try again: type './alignment.txt' in the command line"
+
+fi
+
+
