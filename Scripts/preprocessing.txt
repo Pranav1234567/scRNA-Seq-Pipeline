@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "Welcome "$USER", to this BASH script on preprocessing scRNA-Seq Data"
+echo "Welcome "$USER", to this BASH script on PREPROCESSING scRNA-Seq Data"
+echo "-----------------------------------------"
+echo "-----------------------------------------"
 
 if [ -z $1 ]  || [ -z $2 ] || [ -z $3 ] || [ -z $4 ] 
 then 
@@ -19,8 +21,9 @@ else
 	DEMUX=${ANALYSIS}/Demux
 	TRIM=${ANALYSIS}/Trim
 	SCRIPTS="Documents/scripts"
+	ALIGN=${ANALYSIS}/Align
 
-	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM}
+	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN}
 
 	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
         	rawname=`echo $2 | cut -f1 -d'.'`
@@ -80,6 +83,10 @@ else
 		chmod 777 getNumCells.txt
 		./getNumCells.txt ${INFO}/barcodes.tab
 		typeset -i NUMCELLS=$(cat tempB.txt)
-                ./trimDemuxQC.txt ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS	
+                ./trimDemuxQC.txt ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS
+
+	#Alignment to the Genome
+		chmod 777 alignment.txt	
+		./alignment.txt
 fi
 
