@@ -17,9 +17,10 @@ else
 	QC=${ANALYSIS}/QC
 	INFO=${ANALYSIS}/Info
 	DEMUX=${ANALYSIS}/Demux
+	TRIM=${ANALYSIS}/Trim
 	SCRIPTS="Documents/scripts"
 
-	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX}
+	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM}
 
 	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
         	rawname=`echo $2 | cut -f1 -d'.'`
@@ -31,35 +32,54 @@ else
                 echo "----------------------------------"
                 echo "DONE"
                 echo "------------------------------------"
-                echo "generating quality control reports using FASTQC"
+                echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
 		echo "------------------------------------"
-                $4 --threads 8 ${rawname}_1.fastq -o ${QC}
+		mkdir ${QC}/original/
+                $4 --threads 8 ${rawname}_1.fastq -o ${QC}/original
                 echo "-----------------------------------------"
-                $4 --threads 8 ${rawname}_2.fastq -o ${QC}
+                $4 --threads 8 ${rawname}_2.fastq -o ${QC}/original
                 echo "DONE"
 
- 	#Demultiplex
+ 	#Make Barcode File
 		cd 
 		cd ${SCRIPTS}
 		chmod 777 extractBarcodes.txt
 
 		for f in $(ls ${RAW}/SRR*_1.fastq)
 		do	
+			echo "--------------------------------------"
+			echo "Starting to make barcode file..."
 			./extractBarcodes.txt ${f} ${INFO}
 		done   
-		
-		for f in $(ls ${RAW}/SRR*_1.fastq)
-		do
-			for g in $(ls ${RAW}/SRR*_2.fastq)
-			do
-				mkdir ${DEMUX}/$(basename ${rawname}_1)/
-				mkdir ${DEMUX}/$(basename ${rawname}_2)/
-				fastq-multx ${INFO}/barcodes.tab ${f} ${g} -o ${DEMUX}/$(basename ${rawname}_1)/cell.%.fq ${DEMUX}/$(basename ${rawname}_2)/cell.%.fq
-			done
-		done
-		 
+		echo "DONE"
+		echo "-------------------------------------"
+
+	#Demultiplex
+		chmod 777 demux.txt
+		./demux.txt ${RAW} ${DEMUX} ${rawname} ${INFO}
+		echo "DONE"
+		echo "--------------------------------------"
+ 
+	#Quality Reports for demuxed Cells
+		#chmod 777 demuxQC.txt
+		#mkdir ${QC}/demux
+		#./demuxQC.txt ${DEMUX} ${rawname} ${QC}/demux $4
+ 
 	#Trimming Adapters
 		chmod 777 removeAdapters.txt
-		./removeAdapters.txt ${DEMUX} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
+		echo "Starting to remove adapter sequences"
+		mkdir ${TRIM}/$(basename ${rawname}_1)/
+                mkdir ${TRIM}/$(basename ${rawname}_2)/
+		./removeAdapters.txt ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
+		echo "DONE"
+		echo "--------------------------------------"
+	
+	#Quality Reports for trimmed Cells
+		chmod 777 trimDemuxQC.txt
+                mkdir ${QC}/trim
+		chmod 777 getNumCells.txt
+		./getNumCells.txt ${INFO}/barcodes.tab
+		typeset -i NUMCELLS=$(cat tempB.txt)
+                ./trimDemuxQC.txt ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS	
 fi
 

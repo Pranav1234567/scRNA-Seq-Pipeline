@@ -5,12 +5,11 @@ NUMCELLS=96
 i=1
 while ((i<=NUMCELLS))
 do
-	for f in $(ls $1/$(basename ${2}_1)/cell.$i.fq)
+	for f in $(ls $1/$(basename ${3}_1)/cell.$i.fastq)
 	do
-		 for g in $(ls $1/$(basename ${2}_2)/cell.$i.fq)
-		 do
-			#/Users/Pranav/Documents/Research/AnalysisResults/adapters.fa
-			fastq-mcf $3 -q 20 -x 0.5 ${f} ${g} -o $1/$(basename ${2}_1)/trimCell.$i.fq -o $1/$(basename ${2}_2)/trimCell.$i.fq 		
+		 for g in $(ls $1/$(basename ${3}_2)/cell.$i.fastq)
+		do
+			fastq-mcf $4 -q 20 -x 0.5 ${f} ${g} -o $2/$(basename ${3}_1)/trimCell.$i.fastq -o $2/$(basename ${3}_2)/trimCell.$i.fastq 		
 		done
 	done
 ((i+=1))
