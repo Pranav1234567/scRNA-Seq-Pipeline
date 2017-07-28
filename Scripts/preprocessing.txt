@@ -2,7 +2,6 @@
 
 echo "Welcome "$USER", to this BASH script on PREPROCESSING scRNA-Seq Data"
 echo "-----------------------------------------"
-echo "-----------------------------------------"
 
 if [ -z $1 ]  || [ -z $2 ] || [ -z $3 ] || [ -z $4 ] 
 then 
@@ -32,16 +31,16 @@ else
         	echo "----------------------------------"
                 cd $3
                	./fastq-dump -O ${RAW} -I --split-files $2
-                echo "----------------------------------"
-                echo "DONE"
-                echo "------------------------------------"
-                echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
-		echo "------------------------------------"
-		mkdir ${QC}/original/
-                $4 --threads 8 ${rawname}_1.fastq -o ${QC}/original
-                echo "-----------------------------------------"
-                $4 --threads 8 ${rawname}_2.fastq -o ${QC}/original
-                echo "DONE"
+               # echo "----------------------------------"
+               # echo "DONE"
+               # echo "------------------------------------"
+               # echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
+	#	echo "------------------------------------"
+	#	mkdir ${QC}/original/
+        #        $4 --threads 8 ${rawname}_1.fastq -o ${QC}/original
+        #        echo "-----------------------------------------"
+        #        $4 --threads 8 ${rawname}_2.fastq -o ${QC}/original
+        #        echo "DONE"
 
  	#Make Barcode File
 		cd 
@@ -78,15 +77,15 @@ else
 		echo "--------------------------------------"
 	
 	#Quality Reports for trimmed Cells
-		chmod 777 trimDemuxQC.txt
-                mkdir ${QC}/trim
-		chmod 777 getNumCells.txt
-		./getNumCells.txt ${INFO}/barcodes.tab
-		typeset -i NUMCELLS=$(cat tempB.txt)
-                ./trimDemuxQC.txt ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS
+		#chmod 777 trimDemuxQC.txt
+                #mkdir ${QC}/trim
+		#chmod 777 getNumCells.txt
+		#./getNumCells.txt ${INFO}/barcodes.tab
+		#typeset -i NUMCELLS=$(cat tempB.txt)
+                #./trimDemuxQC.txt ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS
 
 	#Alignment to the Genome
-		chmod 777 alignment.txt	
-		./alignment.txt
+		chmod 777 alignment.txt
+		./alignment.txt ${TRIM} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ 
 fi
 
