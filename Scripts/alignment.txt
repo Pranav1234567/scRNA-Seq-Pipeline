@@ -5,11 +5,9 @@ echo "Enter the alignment software that you wish to use (type 1 for  bowtie2, 2 
 read -p 'Enter here: ' alignment
 
 if [ $alignment = '1' ]
-then
-	
+then	
 	chmod 777 ./Alignment/bowtie2.txt
 	./Alignment/bowtie2.txt ${1} ${2} ${3} ${4} ${5}
- 
 elif [ $alignment = '2' ]
 	then
 	chmod 777 ./Alignment/bwa.txt
@@ -17,7 +15,7 @@ elif [ $alignment = '2' ]
 elif [ $alignment = '3' ]
 	then
 	chmod 777 ./Alignment/bwa.txt
-	./Alignment/bwa.txt
+	./Alignment/tophat2.txt ${1} ${2} ${3} ${4} ${5} ${6}
 elif [ $alignment = '4' ]
 	then
 	chmod 777 ./Alignment/hisat2.txt
