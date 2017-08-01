@@ -16,3 +16,5 @@
 ## Pipeline
 
 - [dropSeqPipe](https://github.com/Hoohm/dropSeqPipe)
+- [Instructions for dropSeqPipe](https://github.com/Hoohm/dropSeqPipe/wiki)
+- [Drop-seq-tools cookbook](http://mccarrolllab.com/wp-content/uploads/2016/03/Drop-seqAlignmentCookbookv1.2Jan2016.pdf)
