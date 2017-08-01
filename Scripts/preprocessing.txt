@@ -3,10 +3,6 @@
 echo "Welcome "$USER", to this BASH script on PREPROCESSING scRNA-Seq Data"
 echo "-----------------------------------------"
 
-if [ -z $1 ]  || [ -z $2 ] || [ -z $3 ] || [ -z $4 ] 
-then 
-	echo "must type './preprocessing.txt </path/to/project> </path/to/Data> </path/to/SRAToolkit> </path/to/FastQC>' "
-else
 	#Predefined by user
 	BASE=$1
 
@@ -19,10 +15,11 @@ else
 	INFO=${ANALYSIS}/Info
 	DEMUX=${ANALYSIS}/Demux
 	TRIM=${ANALYSIS}/Trim
+	COUNTS=${ANALYSIS}/Counts
 	SCRIPTS="Documents/scripts"
 	ALIGN=${ANALYSIS}/Align
 
-	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN}
+	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN} ${COUNTS}
 
 	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
         	rawname=`echo $2 | cut -f1 -d'.'`
@@ -35,12 +32,12 @@ else
                # echo "DONE"
                # echo "------------------------------------"
                # echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
-	#	echo "------------------------------------"
-	#	mkdir ${QC}/original/
-        #        $4 --threads 8 ${rawname}_1.fastq -o ${QC}/original
-        #        echo "-----------------------------------------"
-        #        $4 --threads 8 ${rawname}_2.fastq -o ${QC}/original
-        #        echo "DONE"
+		#echo "------------------------------------"
+		#mkdir ${QC}/original/
+        	#$4 --threads 8 ${rawname}_1.fastq -o ${QC}/original
+        	#echo "-----------------------------------------"
+        	#$4 --threads 8 ${rawname}_2.fastq -o ${QC}/original
+        	#echo "DONE"
 
  	#Make Barcode File
 		cd 
@@ -68,13 +65,13 @@ else
 		#./demuxQC.txt ${DEMUX} ${rawname} ${QC}/demux $4
  
 	#Trimming Adapters
-		chmod 777 removeAdapters.txt
-		echo "Starting to remove adapter sequences"
-		mkdir ${TRIM}/$(basename ${rawname}_1)/
-                mkdir ${TRIM}/$(basename ${rawname}_2)/
-		./removeAdapters.txt ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
-		echo "DONE"
-		echo "--------------------------------------"
+		#chmod 777 removeAdapters.txt
+		#echo "Starting to remove adapter sequences..."
+		#mkdir ${TRIM}/$(basename ${rawname}_1)/
+        	#mkdir ${TRIM}/$(basename ${rawname}_2)/
+		#./removeAdapters.txt ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
+		#echo "DONE"
+		#echo "--------------------------------------"
 	
 	#Quality Reports for trimmed Cells
 		#chmod 777 trimDemuxQC.txt
@@ -84,8 +81,7 @@ else
 		#typeset -i NUMCELLS=$(cat tempB.txt)
                 #./trimDemuxQC.txt ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS
 
-	#Alignment to the Genome
+	#Alignment to the Genome and counts
 		chmod 777 alignment.txt
-		./alignment.txt ${TRIM} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ 
-fi
+		./alignment.txt ${DEMUX} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS}
 

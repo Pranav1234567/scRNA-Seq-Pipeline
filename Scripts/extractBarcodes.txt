@@ -5,11 +5,7 @@ CUTNUM=8
 cut -c1-${CUTNUM} $1 > temp.txt
 awk 'NR % 4 == 2' temp.txt > temp2.txt
 
-cd
-cd Documents/scripts
-chmod 777 getNumCells.txt
-./getNumCells.txt ${5}/barcodes.tab
-typeset -i NUMBARCODES =$(cat tempB.txt)
+NUMBARCODES=96
 
 ./pyscript.py temp2.txt $NUMBARCODES >> python_out.txt
 
