@@ -32,5 +32,8 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
+# Mac indexing files
 *.DS_Store
+
+# Jupyter notebook cruft
 .ipynb_checkpoints/
