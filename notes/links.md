@@ -11,3 +11,8 @@
 
 - [UMI-tools](https://github.com/CGATOxford/UMI-tools)
 - [UMI-tools: Modelling sequencing errors in Unique Molecular Identifiers to improve quantification accuracy](http://genome.cshlp.org/content/early/2017/01/18/gr.209601.116.full.pdf)
+
+
+## Pipeline
+
+- [dropSeqPipe](https://github.com/Hoohm/dropSeqPipe)
