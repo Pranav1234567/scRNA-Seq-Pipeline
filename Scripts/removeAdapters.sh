@@ -1,9 +1,9 @@
 #!/bin/bash
 
-NUMCELLS=96
+NUMCELLS=$5
 
 i=1
-while ((i<=NUMCELLS))
+while ((i<=$NUMCELLS))
 do
 	for f in $(ls $1/$(basename ${3}_1)/cell.$i.fastq)
 	do

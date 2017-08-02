@@ -36,9 +36,12 @@ do
 	((j+=1))
 done
 
+k=1
+
 while ((k <= $NUMCELLS))
 do
 	rm trimCounts_cell$k.txt
+	((k+=1))
 done
 
 

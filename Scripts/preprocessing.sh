@@ -16,7 +16,6 @@ echo "-----------------------------------------"
 	DEMUX=${ANALYSIS}/Demux
 	TRIM=${ANALYSIS}/Trim
 	COUNTS=${ANALYSIS}/Counts
-	SCRIPTS="Documents/scripts"
 	ALIGN=${ANALYSIS}/Align
 
 	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN} ${COUNTS}
@@ -26,61 +25,68 @@ echo "-----------------------------------------"
 		echo "--------------------------------------"
         	echo "Making two FASTQ files from SRA..."
         	echo "----------------------------------"
-                cd $3
-               	./fastq-dump -O ${RAW} -I --split-files $2
-               # echo "----------------------------------"
-               # echo "DONE"
-               # echo "------------------------------------"
-               # echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
+               	fastq-dump -O ${RAW} -I --split-files $3
+                echo "----------------------------------"
+                echo "DONE"
+                #echo "------------------------------------"
+                #echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
 		#echo "------------------------------------"
 		#mkdir ${QC}/original/
-        	#$4 --threads 8 ${rawname}_1.fastq -o ${QC}/original
+        	#fastqc --threads 8 ${rawname}_1.fastq -o ${QC}/original
         	#echo "-----------------------------------------"
-        	#$4 --threads 8 ${rawname}_2.fastq -o ${QC}/original
+        	#fastqc --threads 8 ${rawname}_2.fastq -o ${QC}/original
         	#echo "DONE"
 
- 	#Make Barcode File
-		cd ${1}
+	read -p 'Do you have a barcode file, enter yes or no? ' bfile
+	if [ $bfile = "no" ]
+	then
+	#Make Barcode File
+		cd ${2}
 		chmod 777 extractBarcodes.sh
-
-		for f in $(ls ${RAW}/SRR*_1.fastq)
-		do	
-			echo "--------------------------------------"
-			echo "Starting to make barcode file..."
-			./extractBarcodes.sh ${f} ${INFO}
-		done   
+		echo "--------------------------------------"
+		echo "Making Barcode file..."
+		./extractBarcodes.sh ${INFO} ${RAW}
+		echo "-------------------------------------"	
 		echo "DONE"
 		echo "-------------------------------------"
-
+	elif [ $bfile = "yes" ]
+	then
+		read -p 'Enter the complete path to your barcode file ' path
+		cd $(dirname $path)
+		mv $(basename $path) barcodes.tab
+		mv barcodes.tab ${INFO}/barcodes.tab
+	fi
+	cd ${1}
+	#Number of Cells Constant
+		chmod 777 getNumCells.sh
+                ./getNumCells.sh ${INFO}/barcodes.tab
+                typeset -i NUMCELLS=$(cat tempB.txt)
+	
 	#Demultiplex
 		chmod 777 demux.sh
 		./demux.sh ${RAW} ${DEMUX} ${rawname} ${INFO}
 		echo "DONE"
 		echo "--------------------------------------"
- 
+ 	: '
 	#Quality Reports for demuxed Cells
-		#chmod 777 demuxQC.sh
-		#mkdir ${QC}/demux
-		#./demuxQC.sh ${DEMUX} ${rawname} ${QC}/demux $4
- 
+		chmod 777 demuxQC.sh
+		mkdir ${QC}/demux
+		./demuxQC.sh ${DEMUX} ${rawname} ${QC}/demux $NUMCELLS
+	' 
 	#Trimming Adapters
 		chmod 777 removeAdapters.sh
 		echo "Starting to remove adapter sequences..."
 		mkdir ${TRIM}/$(basename ${rawname}_1)/
         	mkdir ${TRIM}/$(basename ${rawname}_2)/
-		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
+		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa $NUMCELLS 				
 		echo "DONE"
 		echo "--------------------------------------"
-	
+	: '
 	#Quality Reports for trimmed Cells
 		#chmod 777 trimDemuxQC.sh
                 #mkdir ${QC}/trim
-		#chmod 777 getNumCells.sh
-		#./getNumCells.sh ${INFO}/barcodes.tab
-		#typeset -i NUMCELLS=$(cat tempB.txt)
                 #./trimDemuxQC.sh ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS
-
+	'
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
 		./alignment.sh ${TRIM} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS}
-
