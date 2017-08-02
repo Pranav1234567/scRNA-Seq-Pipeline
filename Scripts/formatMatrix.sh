@@ -3,16 +3,16 @@
 #${1} = ${COUNTS}
 #${2} = alignment name
 
-#Converts big matrix text file into csv
-
-Rscript formatMatrix.R ${1} ${2}
-
-cd ${1}/${2}
-cut -d , -f 2- sample.csv > GeneExpressionMatrix.csv
-
 cd
 cd Documents/scripts
 typeset -i NUMCELLS=$(cat tempB.txt)
+
+#Converts big matrix text file into csv
+
+Rscript formatMatrix.R ${1} ${2} $NUMCELLS
+
+cd ${1}/${2}
+cut -d , -f 2- sample.csv > GeneExpressionMatrix.csv
 
 cd ${1}/${2}
 
