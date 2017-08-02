@@ -64,13 +64,13 @@ echo "-----------------------------------------"
 		#./demuxQC.sh ${DEMUX} ${rawname} ${QC}/demux $4
  
 	#Trimming Adapters
-		#chmod 777 removeAdapters.sh
-		#echo "Starting to remove adapter sequences..."
-		#mkdir ${TRIM}/$(basename ${rawname}_1)/
-        	#mkdir ${TRIM}/$(basename ${rawname}_2)/
-		#./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
-		#echo "DONE"
-		#echo "--------------------------------------"
+		chmod 777 removeAdapters.sh
+		echo "Starting to remove adapter sequences..."
+		mkdir ${TRIM}/$(basename ${rawname}_1)/
+        	mkdir ${TRIM}/$(basename ${rawname}_2)/
+		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
+		echo "DONE"
+		echo "--------------------------------------"
 	
 	#Quality Reports for trimmed Cells
 		#chmod 777 trimDemuxQC.sh
@@ -82,5 +82,5 @@ echo "-----------------------------------------"
 
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
-		./alignment.sh ${DEMUX} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS}
+		./alignment.sh ${TRIM} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS}
 

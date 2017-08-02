@@ -1,6 +1,0 @@
-#!/bin/bash
-
-#./preprocessing.txt </path/to/project> </path/to/Data> </path/to/SRAToolkit> </path/to/FastQC>
-cd 
-cd Desktop/scRNA-Seq-Pipeline/Scripts
-./preprocessing.txt /Users/Pranav/Documents/scripts /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546.sra /Users/Pranav/Documents/Research/AnalysisTools/sratoolkit/bin /Applications/FastQC.app/Contents/MacOS/fastqc 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#$1 = ${DEMUX}
+#$1 = ${TRIM}
 #$2 = ${REF}
 #$3 = ${rawname}
 #$4 = ${ALIGN}
@@ -9,17 +9,15 @@
 mkdir ${4}/bowtie2
 cd 
 cd Documents/scripts
-chmod 777 getNumCells.txt
-./getNumCells.txt ${5}/barcodes.tab
 typeset -i NUMCELLS=$(cat tempB.txt)
 
 i=1
 while ((i <= $NUMCELLS))
 do
-                for f in $(ls ${1}/$(basename ${3}_1)/cell.$i.fastq)
+                for f in $(ls ${1}/$(basename ${3}_1)/trimCell.$i.fastq)
                 do
 
-			for g in $(ls ${1}/$(basename ${3}_2)/cell.$i.fastq)
+			for g in $(ls ${1}/$(basename ${3}_2)/trimCell.$i.fastq)
 			do
 
 			mkdir ${4}/bowtie2/cell$i
@@ -34,6 +32,7 @@ do
 			bamtools stats -in output.bam > align_summary.txt
 			samtools view -b -F 4 output.sam > mapped.bam
 			samtools view -b -f 4 output.sam > unmapped.bam
+			samtools sort -n --threads 8 -o sorted_output.bam output.bam
 			rm output.sam
 			echo "outputted all the bam files"
 			echo "---------------------------"
