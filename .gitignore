@@ -31,3 +31,9 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+
+# Mac indexing files
+*.DS_Store
+
+# Jupyter notebook cruft
+.ipynb_checkpoints/
