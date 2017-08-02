@@ -40,48 +40,47 @@ echo "-----------------------------------------"
         	#echo "DONE"
 
  	#Make Barcode File
-		cd 
-		cd ${SCRIPTS}
-		chmod 777 extractBarcodes.txt
+		cd ${1}
+		chmod 777 extractBarcodes.sh
 
 		for f in $(ls ${RAW}/SRR*_1.fastq)
 		do	
 			echo "--------------------------------------"
 			echo "Starting to make barcode file..."
-			./extractBarcodes.txt ${f} ${INFO}
+			./extractBarcodes.sh ${f} ${INFO}
 		done   
 		echo "DONE"
 		echo "-------------------------------------"
 
 	#Demultiplex
-		chmod 777 demux.txt
-		./demux.txt ${RAW} ${DEMUX} ${rawname} ${INFO}
+		chmod 777 demux.sh
+		./demux.sh ${RAW} ${DEMUX} ${rawname} ${INFO}
 		echo "DONE"
 		echo "--------------------------------------"
  
 	#Quality Reports for demuxed Cells
-		#chmod 777 demuxQC.txt
+		#chmod 777 demuxQC.sh
 		#mkdir ${QC}/demux
-		#./demuxQC.txt ${DEMUX} ${rawname} ${QC}/demux $4
+		#./demuxQC.sh ${DEMUX} ${rawname} ${QC}/demux $4
  
 	#Trimming Adapters
-		#chmod 777 removeAdapters.txt
+		#chmod 777 removeAdapters.sh
 		#echo "Starting to remove adapter sequences..."
 		#mkdir ${TRIM}/$(basename ${rawname}_1)/
         	#mkdir ${TRIM}/$(basename ${rawname}_2)/
-		#./removeAdapters.txt ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
+		#./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa 				
 		#echo "DONE"
 		#echo "--------------------------------------"
 	
 	#Quality Reports for trimmed Cells
-		#chmod 777 trimDemuxQC.txt
+		#chmod 777 trimDemuxQC.sh
                 #mkdir ${QC}/trim
-		#chmod 777 getNumCells.txt
-		#./getNumCells.txt ${INFO}/barcodes.tab
+		#chmod 777 getNumCells.sh
+		#./getNumCells.sh ${INFO}/barcodes.tab
 		#typeset -i NUMCELLS=$(cat tempB.txt)
-                #./trimDemuxQC.txt ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS
+                #./trimDemuxQC.sh ${TRIM} ${rawname} ${QC}/trim $4 $NUMCELLS
 
 	#Alignment to the Genome and counts
-		chmod 777 alignment.txt
-		./alignment.txt ${DEMUX} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS}
+		chmod 777 alignment.sh
+		./alignment.sh ${DEMUX} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS}
 
