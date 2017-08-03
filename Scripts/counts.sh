@@ -5,13 +5,12 @@
 #$3 = which alignment name
 #$4 = ${COUNTS}
 #$5 = ${INFO}
+#$6 = $NUMCELLS
 
 i=1
-typeset -i NUMCELLS=$(cat tempB.txt)
-
 mkdir ${4}/${3}
 
-while((i <= $NUMCELLS))
+while((i <= $6))
 do
     htseq-count --quiet --format=bam --stranded=reverse --idattr=gene_id ${1}/${3}/cell$i/sorted_output.bam ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf > ${4}/${3}/counts_cell$i.txt	
     ((i+=1))

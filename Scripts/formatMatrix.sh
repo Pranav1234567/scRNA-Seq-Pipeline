@@ -29,14 +29,3 @@ do
 done
 
 sed -i.bak "1 s/^.*$/$STRING/" GeneExpressionMatrix.csv
-
-
-j=1
-while((j<=$NUMCELLS))
-do
-	rm counts_cell$j.txt
-	((j+=1))
-done
-
-rm matrix$((j-1)).txt
-rm sample.csv

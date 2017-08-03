@@ -21,7 +21,7 @@ echo "-----------------------------------------"
 	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN} ${COUNTS}
 
 	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
-        	rawname=`echo $2 | cut -f1 -d'.'`
+        	rawname=`echo $3 | cut -f1 -d'.'`
 		echo "--------------------------------------"
         	echo "Making two FASTQ files from SRA..."
         	echo "----------------------------------"
@@ -89,4 +89,4 @@ echo "-----------------------------------------"
 	'
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
-		./alignment.sh ${TRIM} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS}
+		./alignment.sh ${TRIM} /Users/Pranav/Documents/Research/AnalysisResults/Reference ${rawname} ${ALIGN} ${INFO} /Users/Pranav/Documents/Research/AnalysisTools/ ${COUNTS} $NUMCELLS
