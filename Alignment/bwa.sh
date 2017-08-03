@@ -5,14 +5,10 @@
 #$3 = ${rawname}
 #$4 = ${ALIGN}
 #$5 = ${INFO}
-#$6 = path/to/analysistools  cd /Users/Pranav/Documents/Research/AnalysisTools/bwa-0.7.15 
+#$6 = $NUMCELLS
 
 mkdir ${4}/bwa
-cd 
-cd Documents/scripts
-chmod 777 getNumCells.txt
-./getNumCells.txt ${5}/barcodes.tab
-typeset -i NUMCELLS=$(cat tempB.txt)
+NUMCELLS=$6
 
 i=1
 while ((i <= $NUMCELLS))
@@ -25,8 +21,7 @@ do
 			mkdir ${4}/bwa/cell$i
 			
 			echo "Beginning Alignment using BWA..."
-			cd ${6}/bwa-0.7.15
-			./bwa mem -M -t 16 ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa ${f} ${g} > ${4}/bwa/cell$i/aln-pe.sam
+			bwa mem -M -t 16 ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa ${f} ${g} > ${4}/bwa/cell$i/aln-pe.sam
 			echo "DONE"
 			
 			done

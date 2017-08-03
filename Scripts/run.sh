@@ -1,14 +1,9 @@
 #!/bin/bash
 
-#./preprocessing.sh </path/to/project> <path/to/scripts> </path/to/Data> 
-
-cd
+#./preprocessing.sh </path/to/project - where user wants project to exist> </path/to/Data> <path/to/Reference Genome Files>
  
-#Where this script is located
-cd Desktop/scRNA-Seq-Pipeline/Scripts
-
 BASE="/Users/Pranav/Documents/scripts"
-SCRIPTS="/Users/Pranav/Documents/Scripts"
 DATA="/Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546.sra"
+REF="/Users/Pranav/Documents/Research/AnalysisResults/Reference"
 
-./preprocessing.sh ${BASE} ${SCRIPTS} ${DATA}
+./preprocessing.sh ${BASE} ${DATA} ${REF}

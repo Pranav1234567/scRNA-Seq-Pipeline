@@ -6,33 +6,39 @@ read -p 'Enter here: ' alignment
 
 if [ $alignment = '1' ]
 then	
-	chmod 777 ./Alignment/bowtie2.sh
-	./Alignment/bowtie2.sh ${1} ${2} ${3} ${4} ${5}
+	chmod 777 ../Alignment/bowtie2.sh
+	../Alignment/bowtie2.sh ${1} ${2} ${3} ${4} ${5} ${7}
 	name="bowtie2"
 elif [ $alignment = '2' ]
 	then
 	chmod 777 ./Alignment/bwa.sh
-	./Alignment/bwa.sh ${1} ${2} ${3} ${4} ${5} ${6}
+	./Alignment/bwa.sh ${1} ${2} ${3} ${4} ${5} ${7}
 	name="bwa"
 elif [ $alignment = '3' ]
 	then
-	chmod 777 ./Alignment/bwa.sh
-	./Alignment/tophat2.sh ${1} ${2} ${3} ${4} ${5} ${6}
+	chmod 777 ./Alignment/tophat.sh
+	./Alignment/tophat2.sh ${1} ${2} ${3} ${4} ${5} ${7}
 	name="tophat2"
 elif [ $alignment = '4' ]
 	then
 	chmod 777 ./Alignment/STAR.sh
-	./Alignment/STAR.sh
+	./Alignment/STAR.sh ${1} ${2} ${3} ${4} ${5} ${7}
 	name="STAR"
+elif [ $alignment = '5' ]
+	then
+	chmod 777 ./Alignment/hisat2.sh
+	./Alignment/hisat2.sh ${1} ${2} ${3} ${4} ${5} ${7}
+	name="hisat2"
 else 
-	echo "please try again: type './alignment.txt' in the command line"
+	echo "There was an error in your input. We will re-run this script shortly..."
+	./alignment.txt ${1} ${2} ${3} ${4} ${5} ${6} ${7}
 
 fi
 
 echo "Beginning to get counts..."
 
 chmod 777 counts.sh
-./counts.sh ${4} ${2} ${name} ${7} ${5} ${8}
+./counts.sh ${4} ${2} ${name} ${6} ${5} ${7}
 
 
 

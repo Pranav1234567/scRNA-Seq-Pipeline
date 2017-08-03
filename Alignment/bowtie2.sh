@@ -5,11 +5,10 @@
 #$3 = ${rawname}
 #$4 = ${ALIGN}
 #$5 = ${INFO}
+#$6 = $NUMCELLS
 
 mkdir ${4}/bowtie2
-cd 
-cd Documents/scripts
-typeset -i NUMCELLS=$(cat tempB.txt)
+NUMCELLS=$6
 
 i=1
 while ((i <= $NUMCELLS))

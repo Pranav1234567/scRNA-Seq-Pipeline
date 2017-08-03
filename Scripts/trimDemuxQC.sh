@@ -3,7 +3,7 @@
 #${1} = ${TRIM}
 #${2} = ${rawname}
 #${3} = ${QC}/trim
-#$4 = number of cells = # lines in the barcode file
+#${4} = $NUMCELLS
 echo "Generating quality control reports (Trimmed and Demuxed Cells) using FASTQC..."
 
 i=1

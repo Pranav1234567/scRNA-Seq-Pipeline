@@ -18,3 +18,5 @@ do
 
 	rm noQuotes_python_out.txt onlySeq_python_out.txt python_out.txt temp.txt                      
 done
+
+rm temp2.txt
