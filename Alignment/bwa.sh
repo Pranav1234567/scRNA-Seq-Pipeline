@@ -13,28 +13,24 @@ NUMCELLS=$6
 i=1
 while ((i <= $NUMCELLS))
 do
-                for f in $(ls ${1}/$(basename ${3}_1)/trimCell.$i.fastq)
-                do
-			for g in $(ls ${1}/$(basename ${3}_2)/trimCell.$i.fastq)
-			do
-
-			mkdir ${4}/bwa/cell$i
+	for f in $(ls ${1}/$(basename ${3}_2)/trimCell.$i.fastq)
+	do
+		mkdir ${4}/bwa/cell$i
 			
-			echo "Beginning Alignment using BWA..."
-			bwa mem -M -t 16 ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa ${f} ${g} > ${4}/bwa/cell$i/aln-pe.sam
-			echo "DONE"
+		echo "Beginning Alignment using BWA..."
+		bwa mem -t 16 ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa ${f} > ${4}/bwa/cell$i/output.sam
+		echo "DONE"
 			
-			done
-			cd ${4}/bwa/cell$i
-			samtools view -bS aln-pe.sam > aln-pe.bam 
-                	bamtools stats -in aln-pe.bam > alignment_summary.txt
-			samtools flagstat aln-pe.bam > flagstats.txt
-			samtools view -b -F 4 aln-pe.sam > mapped.bam
-                        samtools view -b -f 4 aln-pe.sam > unmapped.bam
-                        rm aln-pe.sam
-                        echo "outputted all the bam files"
-                        echo "---------------------------"
-		done
+	done
+		samtools view -bS ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/output.bam 
+                bamtools stats -in ${4}/bwa/cell$i/output.bam > ${4}/bwa/cell$i/alignment_summary.txt
+		samtools flagstat ${4}/bwa/cell$i/output.bam > ${4}/bwa/cell$i/flagstats.txt
+		samtools view -b -F 4 ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/mapped.bam
+                samtools view -b -f 4 ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/unmapped.bam
+                samtools sort -n --threads 8 -o ${4}/bwa/cell$i/sorted_output.bam ${4}/bwa/cell$i/output.bam
+		rm ${4}/bwa/cell$i/output.sam
+                echo "outputted all the bam files"
+                echo "---------------------------"
 ((i+=1))
 done
 

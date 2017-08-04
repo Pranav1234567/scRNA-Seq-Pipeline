@@ -50,8 +50,8 @@ echo "-----------------------------------------"
 	elif [ $bfile = "yes" ]
 	then
 		read -p 'Enter the complete path to your barcode file ' path
-		mv $path ${INFO}/barcodes.tab
-		echo "moved file"
+		cp $path ${INFO}/barcodes.tab
+		echo "copied file to INFO directory"
 	fi
 	echo "-----------------------------------"
 	#Number of Cells Constant

@@ -26,13 +26,12 @@ do
 			echo "DONE"
 
 			done 
-                	cd ${4}/bowtie2/cell$i
-			samtools view -bS output.sam > output.bam
-			bamtools stats -in output.bam > align_summary.txt
-			samtools view -b -F 4 output.sam > mapped.bam
-			samtools view -b -f 4 output.sam > unmapped.bam
-			samtools sort -n --threads 8 -o sorted_output.bam output.bam
-			rm output.sam
+			samtools view -bS ${4}/bowtie2/cell$i/output.sam > ${4}/bowtie2/cell$i/output.bam
+			bamtools stats -in ${4}/bowtie2/cell$i/output.bam > ${4}/bowtie2/cell$i/align_summary.txt
+			samtools view -b -F 4 ${4}/bowtie2/cell$i/output.sam > ${4}/bowtie2/cell$i/mapped.bam
+			samtools view -b -f 4 ${4}/bowtie2/cell$i/output.sam > ${4}/bowtie2/cell$i/unmapped.bam
+			samtools sort -n --threads 8 -o ${4}/bowtie2/cell$i/sorted_output.bam ${4}/bowtie2/cell$i/output.bam
+			rm ${4}/bowtie2/cell$i/output.sam
 			echo "outputted all the bam files"
 			echo "---------------------------"
 		done
