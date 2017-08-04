@@ -50,9 +50,8 @@ echo "-----------------------------------------"
 	elif [ $bfile = "yes" ]
 	then
 		read -p 'Enter the complete path to your barcode file ' path
-		cd $(dirname $path)
-		mv $(basename $path) barcodes.tab
-		mv barcodes.tab ${INFO}/barcodes.tab
+		mv $path ${INFO}/barcodes.tab
+		echo "moved file"
 	fi
 	echo "-----------------------------------"
 	#Number of Cells Constant
@@ -62,18 +61,18 @@ echo "-----------------------------------------"
                 typeset -i NUMCELLS=$(cat tempB.txt)
 		echo "DONE getting number of cells constant"
 	echo "-----------------------------------"
-	: '
+	echo $NUMCELLS
 	#Demultiplex
 		chmod 777 demux.sh
 		./demux.sh ${RAW} ${DEMUX} ${rawname} ${INFO}
 		echo "DONE demultiplexing cells"
 		echo "--------------------------------------"
- 	
+ 	: '
 	#Quality Reports for demuxed Cells
 		chmod 777 demuxQC.sh
 		mkdir ${QC}/demux
 		./demuxQC.sh ${DEMUX} ${rawname} ${QC}/demux $NUMCELLS
-	 
+	' 
 	#Trimming Adapters
 		chmod 777 removeAdapters.sh
 		echo "Starting to remove adapter sequences..."
@@ -82,13 +81,12 @@ echo "-----------------------------------------"
 		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa $NUMCELLS 				
 		echo "DONE removing adapter sequences"
 		echo "--------------------------------------"
-	
+	: '
 	#Quality Reports for trimmed Cells
 		chmod 777 trimDemuxQC.sh
                 mkdir ${QC}/trim
                 ./trimDemuxQC.sh ${TRIM} ${rawname} ${QC}/trim $NUMCELLS
-	
+	'
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
 		./alignment.sh ${TRIM} ${3} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS
-	'
