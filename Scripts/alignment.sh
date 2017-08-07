@@ -16,7 +16,7 @@ elif [ $alignment = '2' ]
 	name="bwa"
 elif [ $alignment = '3' ]
 	then
-	chmod 777 ../Alignment/tophat.sh
+	chmod 777 ../Alignment/tophat2.sh
 	../Alignment/tophat2.sh ${1} ${2} ${3} ${4} ${5} ${7}
 	name="tophat2"
 elif [ $alignment = '4' ]
@@ -31,7 +31,7 @@ elif [ $alignment = '5' ]
 	name="hisat2"
 else 
 	echo "There was an error in your input. We will re-run this script shortly..."
-	./alignment.txt ${1} ${2} ${3} ${4} ${5} ${6} ${7}
+	./alignment.sh ${1} ${2} ${3} ${4} ${5} ${6} ${7}
 
 fi
 

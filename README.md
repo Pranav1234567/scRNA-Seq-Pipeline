@@ -12,5 +12,9 @@ In order to use this repository, first download the following programs:
 - bwa at this link: https://sourceforge.net/projects/bio-bwa/files/ 
 - STAR at this link: https://github.com/alexdobin/STAR 
 - HiSat2 at this link: https://ccb.jhu.edu/software/hisat2/manual.shtml
+- HTSeq at this link: http://htseq.readthedocs.io/en/release_0.9.1/ 
 
+Alternatively, if you are a Mac/Linux user you can run the download_analysis_tools.sh
+script to download these tools after you have installed homebrew/Linuxbrew package manager
+and have installed PyPi - Python Package Index. 
 

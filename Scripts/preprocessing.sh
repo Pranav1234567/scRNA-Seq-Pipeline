@@ -78,7 +78,7 @@ echo "-----------------------------------------"
 		echo "Starting to remove adapter sequences..."
 		mkdir ${TRIM}/$(basename ${rawname}_1)/
         	mkdir ${TRIM}/$(basename ${rawname}_2)/
-		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa $NUMCELLS 				
+		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} ${4} $NUMCELLS 				
 		echo "DONE removing adapter sequences"
 		echo "--------------------------------------"
 	: '
@@ -90,3 +90,5 @@ echo "-----------------------------------------"
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
 		./alignment.sh ${TRIM} ${3} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS
+
+	

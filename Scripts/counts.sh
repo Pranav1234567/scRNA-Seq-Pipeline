@@ -31,3 +31,6 @@ chmod 777 combineCol.sh
 ./formatMatrix.sh ${4} ${3} 
 
 echo "outputted GENE EXPRESSION MATRIX"
+
+
+rm tempA.txt tempB.txt

@@ -5,5 +5,6 @@
 BASE="/Users/Pranav/Documents/scripts"
 DATA="/Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546.sra"
 REF="/Users/Pranav/Documents/Research/AnalysisResults/Reference"
+ADAPTERS="/Users/Pranav/Documents/Research/AnalysisResults/adapters.fa"
 
-./preprocessing.sh ${BASE} ${DATA} ${REF}
+./preprocessing.sh ${BASE} ${DATA} ${REF} ${ADAPTERS}
