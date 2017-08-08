@@ -16,7 +16,7 @@ do
                 do
                         mkdir ${4}/hisat2/cell$i
 			echo "Beginning Alignment using HISAT2..."
-                        hisat2 -q -I 40 -X 100 -t --un ${4}/hisat2/cell$i/unaligned.fastq --al ${4}/hisat2/cell$i/aligned.fastq -p 8 --qc-filter -x ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/HiSat2Index/genome -U $f -S ${4}/hisat2/cell$i/output.sam  
+                        hisat2 -q -I 40 -X 100 -t --un ${4}/hisat2/cell$i/unaligned.fastq --al ${4}/hisat2/cell$i/aligned.fastq -p 8 --qc-filter -x ${2}/HiSat2Index/genome -U $f -S ${4}/hisat2/cell$i/output.sam  
 			cd ${4}/hisat2/cell$i
                         samtools view -bS ${4}/hisat2/cell$i/output.sam > ${4}/hisat2/cell$i/output.bam
 			bamtools stats -in ${4}/hisat2/cell$i/output.bam > ${4}/hisat2/cell$i/align_summary.txt

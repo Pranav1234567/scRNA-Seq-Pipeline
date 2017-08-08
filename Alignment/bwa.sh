@@ -18,7 +18,7 @@ do
 		mkdir ${4}/bwa/cell$i
 			
 		echo "Beginning Alignment using BWA..."
-		bwa mem -t 16 ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa ${f} > ${4}/bwa/cell$i/output.sam
+		bwa mem -t 16 ${2}/BWAIndex/genome.fa ${f} > ${4}/bwa/cell$i/output.sam
 		echo "DONE"
 			
 	done

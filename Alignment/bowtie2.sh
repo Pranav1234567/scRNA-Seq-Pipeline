@@ -22,7 +22,7 @@ do
 			mkdir ${4}/bowtie2/cell$i
   			
 			echo "Beginning Alignment using BOWTIE2..."
-                        bowtie2 -q --local -t --un-conc ${4}/bowtie2/cell$i/unconc.fastq --al-conc ${4}/bowtie2/cell$i/alconc.fastq -p 8 --qc-filter -x ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome -1 ${f} -2 ${g} -S ${4}/bowtie2/cell$i/output.sam
+                        bowtie2 -q --local -t --un-conc ${4}/bowtie2/cell$i/unconc.fastq --al-conc ${4}/bowtie2/cell$i/alconc.fastq -p 8 --qc-filter -x ${2}/Bowtie2Index/genome -1 ${f} -2 ${g} -S ${4}/bowtie2/cell$i/output.sam
 			echo "DONE"
 
 			done 

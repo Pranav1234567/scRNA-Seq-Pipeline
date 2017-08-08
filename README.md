@@ -2,6 +2,8 @@
 
 This repository handles creating a analysis pipeline for single cell RNA-seq data.
 
+### Installation
+
 In order to use this repository, first download the following programs:
 - FastQC at this link: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/ 
 - sratoolkit at this link: https://www.ncbi.nlm.nih.gov/sra/docs/toolkitsoft/ 
@@ -18,3 +20,19 @@ Alternatively, if you are a Mac/Linux user you can run the download_analysis_too
 script to download these tools after you have installed homebrew/Linuxbrew package manager
 and have installed PyPi - Python Package Index. 
 
+Once you have downloaded these tools, you can download/clone the repo.
+
+### Usage
+
+In order to run the pipeline,
+modify the run.sh script by opening it in a text editor, changing the directories listed. Then, 
+in the command-line run this script by typing ./run.sh.
+
+Currently, this is the way to use the pipeline. In the future, I will make this easier, so 
+look out for updates!  
+
+Notes: Making barcodes functionality is configured to produce a set number of barcodes. 
+This number can be adjusted in pyscript.py. 
+
+For any questions, please feel free to reach out to pnpiano@gmail.com.
+   

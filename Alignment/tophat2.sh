@@ -18,7 +18,7 @@ do
         do
 		mkdir ${4}/tophat2/cell$i
 		echo "Beginning Alignment using TOPHAT2"
-		tophat2 -G ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf -o ${4}/tophat2/cell$i --num-threads 16 --transcriptome-max-hits 1 --max-multihits 1 --no-coverage-search --no-novel-juncs ${2}/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome ${f} 	
+		tophat2 -G ${8}/genes.gtf -o ${4}/tophat2/cell$i --num-threads 16 --transcriptome-max-hits 1 --max-multihits 1 --no-coverage-search --no-novel-juncs ${2}/Bowtie2Index/genome ${f} 	
 		samtools sort -n --threads 8 -o ${4}/tophat2/cell$i/sorted_output.bam ${4}/tophat2/cell$i/accepted_hits.bam
 		echo "DONE"
 	done	

@@ -17,7 +17,7 @@ elif [ $alignment = '2' ]
 elif [ $alignment = '3' ]
 	then
 	chmod 777 ../Alignment/tophat2.sh
-	../Alignment/tophat2.sh ${1} ${2} ${3} ${4} ${5} ${7}
+	../Alignment/tophat2.sh ${1} ${2} ${3} ${4} ${5} ${7} ${8}
 	name="tophat2"
 elif [ $alignment = '4' ]
 	then
@@ -31,14 +31,14 @@ elif [ $alignment = '5' ]
 	name="hisat2"
 else 
 	echo "There was an error in your input. We will re-run this script shortly..."
-	./alignment.sh ${1} ${2} ${3} ${4} ${5} ${6} ${7}
+	./alignment.sh ${1} ${2} ${3} ${4} ${5} ${6} ${7} ${8}
 
 fi
 
 echo "Beginning to get counts..."
 
 chmod 777 counts.sh
-./counts.sh ${4} ${2} ${name} ${6} ${5} ${7}
+./counts.sh ${4} ${2} ${name} ${6} ${5} ${7} ${8}
 
 
 

@@ -6,19 +6,17 @@ echo "-----------------------------------------"
 	#Predefined by user
 	BASE=$1
 
-	PROJ=${BASE}/Project
+	PREPROC=${BASE}/Preprocess
 
-	ANALYSIS=${PROJ}/Analysis
-
-	RAW=${ANALYSIS}/Raw
-	QC=${ANALYSIS}/QC
-	INFO=${ANALYSIS}/Info
-	DEMUX=${ANALYSIS}/Demux
-	TRIM=${ANALYSIS}/Trim
-	COUNTS=${ANALYSIS}/Counts
-	ALIGN=${ANALYSIS}/Align
-
-	mkdir ${PROJ} ${ANALYSIS} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN} ${COUNTS}
+	RAW=${PREPROC}/Raw
+	QC=${PREPROC}/QC
+	INFO=${PREPROC}/Info
+	DEMUX=${PREPROC}/Demux
+	TRIM=${PREPROC}/Trim
+	COUNTS=${PREPROC}/Counts
+	ALIGN=${PREPROC}/Align
+		
+	mkdir ${PREPROC} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN} ${COUNTS}
 
 	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
         	rawname=`echo $2 | cut -f1 -d'.'`
@@ -78,7 +76,7 @@ echo "-----------------------------------------"
 		echo "Starting to remove adapter sequences..."
 		mkdir ${TRIM}/$(basename ${rawname}_1)/
         	mkdir ${TRIM}/$(basename ${rawname}_2)/
-		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} ${4} $NUMCELLS 				
+		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} ${5} $NUMCELLS 				
 		echo "DONE removing adapter sequences"
 		echo "--------------------------------------"
 	: '
@@ -87,8 +85,8 @@ echo "-----------------------------------------"
                 mkdir ${QC}/trim
                 ./trimDemuxQC.sh ${TRIM} ${rawname} ${QC}/trim $NUMCELLS
 	'
+
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
-		./alignment.sh ${TRIM} ${3} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS
-
+		./alignment.sh ${TRIM} ${3} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS ${4}
 	
