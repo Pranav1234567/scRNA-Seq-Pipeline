@@ -26,10 +26,14 @@ Once you have downloaded these tools, you can download/clone the repo.
 
 In order to run the pipeline,
 modify the run.sh script by opening it in a text editor, changing the directories listed. Then, 
-in the command-line run this script by typing ./run.sh.
+in the command-line run this script by typing ./run.sh [options].
 
 Currently, this is the way to use the pipeline. In the future, I will make this easier, so 
 look out for updates!  
+
+### Options
+
+ --build --> to build alignment index files (default is to input index files)
 
 Notes: Making barcodes functionality is configured to produce a set number of barcodes. 
 This number can be adjusted in pyscript.py. 

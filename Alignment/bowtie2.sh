@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #$1 = ${TRIM}
-#$2 = ${REF}
+#$2 = ${INDEX}
 #$3 = ${rawname}
 #$4 = ${ALIGN}
 #$5 = ${INFO}

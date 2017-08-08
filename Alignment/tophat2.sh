@@ -2,11 +2,12 @@
 #!/bin/bash
 
 #$1 = ${DEMUX}
-#$2 = ${REF}
+#$2 = ${INDEX}
 #$3 = ${rawname}
 #$4 = ${ALIGN}
 #$5 = ${INFO}
 #$6 = $NUMCELLS
+#$7 = ${GENES_DIR}
 
 mkdir ${4}/tophat2
 NUMCELLS=$6

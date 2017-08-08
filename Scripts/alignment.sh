@@ -22,7 +22,7 @@ elif [ $alignment = '3' ]
 elif [ $alignment = '4' ]
 	then
 	chmod 777 ../Alignment/STAR.sh
-	../Alignment/STAR.sh ${1} ${2} ${3} ${4} ${5} ${7}
+	../Alignment/STAR.sh ${1} ${2} ${3} ${4} ${5} ${7} ${8}
 	name="STAR"
 elif [ $alignment = '5' ]
 	then
