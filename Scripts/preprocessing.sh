@@ -35,8 +35,7 @@ echo "-----------------------------------------"
         	#fastqc --threads 8 ${rawname}_2.fastq -o ${QC}/original
         	#echo "DONE generating quality control reports using FASTQC"
 		echo "---------------------------------------"
-	read -p 'Do you have a barcode file, enter yes or no? ' bfile
-	if [ $bfile = "no" ]
+	if [ "$7" = "" ]
 	then
 	#Make Barcode File
 		chmod 777 extractBarcodes.sh
@@ -45,10 +44,8 @@ echo "-----------------------------------------"
 		./extractBarcodes.sh ${INFO} ${RAW}
 		echo "-------------------------------------"	
 		echo "DONE making barcode file"
-	elif [ $bfile = "yes" ]
-	then
-		read -p 'Enter the complete path to your barcode file ' path
-		cp $path ${INFO}/barcodes.tab
+	else
+		cp $7 ${INFO}/barcodes.tab
 		echo "copied file to INFO directory"
 	fi
 	echo "-----------------------------------"
@@ -88,5 +85,5 @@ echo "-----------------------------------------"
 
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
-		./alignment.sh ${TRIM} ${3} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS ${4}
+		./alignment.sh ${TRIM} ${3} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS ${4} ${6}
 	

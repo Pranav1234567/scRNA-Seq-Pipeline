@@ -6,13 +6,14 @@
 #$4 = ${COUNTS}
 #$5 = ${INFO}
 #$6 = $NUMCELLS
+#$7 = ${GENES_DIR}
 
 i=1
 mkdir ${4}/${3}
 
 while((i <= $6))
 do
-    htseq-count --quiet --format=bam --stranded=reverse --idattr=gene_id ${1}/${3}/cell$i/sorted_output.bam ${8}/genes.gtf > ${4}/${3}/counts_cell$i.txt	
+    htseq-count --quiet --format=bam --stranded=reverse --idattr=gene_id ${1}/${3}/cell$i/sorted_output.bam ${7}/genes.gtf > ${4}/${3}/counts_cell$i.txt	
     ((i+=1))
 done
 
