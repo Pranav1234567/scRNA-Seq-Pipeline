@@ -33,14 +33,14 @@ look out for updates!
 
 ### Options
 
- --build --> to build alignment index files (default is to input index files)
- --generateBarcodes --> to have the pipeline generate cell Barcodes, given
-			that there were no barcodes provided
- --<alignment> --> (Must provide this option or pipeline will halt!) either 
-		   type '--bowtie2', '--bwa', '--tophat2', or '--hisat2'
-Notes: Making barcodes functionality is configured to produce a set number of barcodes. 
+ --build --> to build alignment index files (default is to input index files) <br /> 
+ --generateBarcodes --> to have the pipeline generate cell Barcodes, given <br />
+			that there were no barcodes provided <br />
+ --[alignment] --> (Must provide this option or pipeline will halt!) either <br /> 
+		   type '--bowtie2', '--bwa', '--tophat2', or '--hisat2' <br />
+Notes: Making barcodes functionality is configured to produce a set number of barcodes. <br /> 
 This number can be adjusted in pyscript.py. STAR index building and alignment
-are yet to be configured.
+are yet to be configured. <br />
 
 For any questions, please feel free to reach out to pnpiano@gmail.com.
    
