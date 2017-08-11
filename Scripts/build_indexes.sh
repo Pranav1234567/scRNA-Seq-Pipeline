@@ -10,29 +10,31 @@ mkdir ${1}/Genes
 
 cp $3 ${1}/Genes/$(basename $3)
 
-if [ "$4" = "--bowtie2" ] || ["$4" = "--tophat2"]
+if [ "$4" = "--bowtie2" ] || [ "$4" = "--tophat2" ]
 then
 	mkdir ${1}/Indexes/Bowtie2Index
+	ln -s $2 ${1}/Indexes/Bowtie2Index/genome.fa
 	cd ${1}/Indexes/Bowtie2Index
-	bowtie2-build --threads 8 $2 genome 
-	cd ../../..
+	bowtie2-build --threads 8 ${1}/Indexes/Bowtie2Index/genome.fa genome
+	cd ../../.. 
 elif [ "$4" = "--bwa" ]
 then
 	mkdir ${1}/Indexes/BWAIndex
-	cd ${1}/Indexes/BWAIndex
-	bwa index $2
-	cd ../../..
+	ln -s $2 ${1}/Indexes/BWAIndex/genome.fa
+	bwa index ${1}/Indexes/BWAIndex/genome.fa 
 elif [ "$4" = "--hisat2" ]
 then
 	mkdir ${1}/Indexes/HiSat2Index
 	cd ${1}/Indexes/HiSat2Index
-	hisat2-build $2 genome
+	ln -s $2 genome.fa
+	hisat2-build genome.fa genome
 	cd ../../..
 elif [ "$4" = "--STAR" ]
 then
 	mkdir ${1}/Indexes/STARIndex
 	cd ${1}/Indexes/STARIndex
-	STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ${BASE}/Indexes/STARIndex --genomeFastaFiles $2  --sjdbGTFfile $3
+	ln -s $2 genome.fa
+	STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ${1}/Indexes/STARIndex --genomeFastaFiles genome.fa  --sjdbGTFfile $3
 	cd ../../..
 else 
 	echo "there was an error processing input, please re-run run.sh with your options..."

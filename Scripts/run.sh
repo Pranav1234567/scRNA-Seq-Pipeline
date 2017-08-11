@@ -76,12 +76,12 @@ else
                 fi
 			
 	fi
-fi
 
-################ running main scripts w/ user options ################################
+################ running main scripts w/ user options #########################
 
-#./preprocessing.sh </path/to/project - where user wants project to exist> </path/to/Data> <path/to/Alignment Index files> <path/to/GFF/GTF files> <path/to/adapters> <path/to/alignment request> <path/to/barcodes>
+	#./preprocessing.sh </path/to/project - where user wants project to exist> </path/to/Data> <path/to/Index files> <path/to/Genes Directory> <path/to/adapters> <alignment type> <barcode option>
 
-./preprocessing.sh ${BASE} ${DATA} ${INDEX} ${GENES_DIR} ${ADAPTERS} ${align_reqs[0]} ${barcode_option}
-	
+	./preprocessing.sh ${BASE} ${DATA} ${INDEX} ${GENES_DIR} ${ADAPTERS} ${align_reqs[0]} ${barcode_option}
+
+fi	
 
