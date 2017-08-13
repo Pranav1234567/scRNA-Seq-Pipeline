@@ -15,6 +15,7 @@ In order to use this repository, first download the following programs:
 - STAR at this link: https://github.com/alexdobin/STAR 
 - HiSat2 at this link: https://ccb.jhu.edu/software/hisat2/manual.shtml
 - HTSeq at this link: http://htseq.readthedocs.io/en/release_0.9.1/ 
+- shyaml at this link: https://github.com/0k/shyaml
 
 Alternatively, if you are a Mac/Linux user you can run the download_analysis_tools.sh
 script to download these tools after you have installed homebrew/Linuxbrew package manager
@@ -25,11 +26,7 @@ Once you have downloaded these tools, you can download/clone the repo.
 ### Usage
 
 In order to run the pipeline,
-modify the run.sh script by opening it in a text editor, changing the directories listed. Then, 
-in the command-line run this script by typing ./run.sh [options].
-
-Currently, this is the way to use the pipeline. In the future, I will make this easier, so 
-look out for updates!  
+modify the config.yaml script by opening it in a text editor, changing the directories listed. Then, in the command-line run this script by typing ./run.sh [options].
 
 ### Options
 

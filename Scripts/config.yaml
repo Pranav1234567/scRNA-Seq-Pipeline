@@ -1,0 +1,7 @@
+BASE: /Users/Pranav/Documents/scripts
+DATA: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546.sra
+ADAPTERS: /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa
+REF: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10
+GENOME: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa
+GENES: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf
+BARCODES: /Users/Pranav/Documents/Research/AnalysisResults/Demux/GSE76983_cel-seq_barcodes.csv

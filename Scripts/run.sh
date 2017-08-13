@@ -1,12 +1,14 @@
 #!/bin/bash
 
-BASE="/Users/Pranav/Documents/scripts"
-DATA="/Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546.sra"
-ADAPTERS="/Users/Pranav/Documents/Research/AnalysisResults/adapters.fa"
-REF="/Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10"
-GENOME=${REF}/Sequence/WholeGenomeFasta/genome.fa
-GENES=${REF}/Annotation/Genes/genes.gtf
-BARCODES="/Users/Pranav/Documents/Research/AnalysisResults/Demux/GSE76983_cel-seq_barcodes.csv"
+################ get variables from shyaml configuration file ######################
+
+BASE=$(cat config.yaml | shyaml get-value BASE)
+DATA=$(cat config.yaml | shyaml get-value DATA)
+ADAPTERS=$(cat config.yaml | shyaml get-value ADAPTERS)
+REF=$(cat config.yaml | shyaml get-value REF)
+GENOME=$(cat config.yaml | shyaml get-value GENOME)
+GENES=$(cat config.yaml | shyaml get-value GENES)
+BARCODES=$(cat config.yaml | shyaml get-value BARCODES)
 
 #################### obtaining user options #######################################
 
@@ -84,4 +86,3 @@ else
 	./preprocessing.sh ${BASE} ${DATA} ${INDEX} ${GENES_DIR} ${ADAPTERS} ${align_reqs[0]} ${barcode_option}
 
 fi	
-

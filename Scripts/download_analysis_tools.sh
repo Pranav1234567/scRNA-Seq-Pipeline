@@ -41,3 +41,5 @@ pip install Cython
 pip install 'pysam>=0.9'
 pip install HTSeq
 
+#shyaml 
+pip install shyaml
