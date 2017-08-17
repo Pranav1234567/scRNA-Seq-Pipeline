@@ -29,9 +29,8 @@ chmod 777 combineCol.sh
 
 #Converts big matrix text file into csv
 
-./formatMatrix.sh ${4} ${3} 
+./formatMatrix.sh ${4} ${3} ${6}
 
 echo "outputted GENE EXPRESSION MATRIX"
-
 
 rm tempA.txt tempB.txt

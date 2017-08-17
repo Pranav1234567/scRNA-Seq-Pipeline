@@ -2,14 +2,11 @@
 
 #${1} = ${COUNTS}
 #${2} = alignment name
-
-cd
-cd Documents/scripts
-typeset -i NUMCELLS=$(cat tempB.txt)
+#${3} = $NUMCELLS
 
 #Converts big matrix text file into csv
 
-Rscript formatMatrix.R ${1} ${2} $NUMCELLS
+Rscript formatMatrix.R ${1} ${2} ${3}
 
 cd ${1}/${2}
 cut -d , -f 2- sample.csv > GeneExpressionMatrix.csv

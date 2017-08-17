@@ -13,16 +13,13 @@ NUMCELLS=$6
 i=1
 while ((i <= $NUMCELLS))
 do
-                for f in $(ls ${1}/$(basename ${3}_1)/trimCell.$i.fastq)
-                do
-
-			for g in $(ls ${1}/$(basename ${3}_2)/trimCell.$i.fastq)
-			do
+		for f in $(ls ${1}/$(basename ${3}_2)/trimCell.$i.fastq)
+		do
 
 			mkdir ${4}/bowtie2/cell$i
   			
 			echo "Beginning Alignment using BOWTIE2..."
-                        bowtie2 -q --local -t --un-conc ${4}/bowtie2/cell$i/unconc.fastq --al-conc ${4}/bowtie2/cell$i/alconc.fastq -p 8 --qc-filter -x ${2}/Bowtie2Index/genome -1 ${f} -2 ${g} -S ${4}/bowtie2/cell$i/output.sam
+                        bowtie2 -q --local -t --un ${4}/bowtie2/cell$i/un.fastq --al ${4}/bowtie2/cell$i/al.fastq -p 8 --qc-filter -x ${2}/Bowtie2Index/genome -U ${f} -S ${4}/bowtie2/cell$i/output.sam
 			echo "DONE"
 
 			done 
