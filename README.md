@@ -44,7 +44,8 @@ print('Splitting reads by cell')
 		reads_assigned_pipe, 
 		output_dir, 
 		reads_unzipped, 
-		barcodes_unzipped))```
+		barcodes_unzipped))
+```
 
 STAR index building and alignment are yet to be configured. <br />
 
