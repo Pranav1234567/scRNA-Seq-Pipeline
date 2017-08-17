@@ -37,13 +37,13 @@ modify the config.yaml script by opening it in a text editor, changing the direc
 
 Notes: Making barcodes functionality uses the python package sircel, whose source code is slightly modified. The following code in split_reads.py is commented out to delay demultiplexing to later in the pipeline.
 
-`print('Splitting reads by cell')
-	output_files['split'] = write_split_fastqs(
-		(reads_assigned_db,
-		reads_assigned_pipe,
-		output_dir,
-		reads_unzipped,
-		barcodes_unzipped))`
+`print('Splitting reads by cell') <br />
+	output_files['split'] = write_split_fastqs( <br />
+		(reads_assigned_db, <br />
+		reads_assigned_pipe, <br />
+		output_dir, <br />
+		reads_unzipped, <br />
+		barcodes_unzipped)) <br />`
 
 STAR index building and alignment are yet to be configured. <br />
 
