@@ -16,6 +16,7 @@ In order to use this repository, first download the following programs:
 - HiSat2 at this link: https://ccb.jhu.edu/software/hisat2/manual.shtml
 - HTSeq at this link: http://htseq.readthedocs.io/en/release_0.9.1/ 
 - shyaml at this link: https://github.com/0k/shyaml
+- sircel at this link: https://github.com/pachterlab/sircel 
 
 Alternatively, if you are a Mac/Linux user you can run the download_analysis_tools.sh
 script to download these tools after you have installed homebrew/Linuxbrew package manager
@@ -34,9 +35,17 @@ modify the config.yaml script by opening it in a text editor, changing the direc
 ` --generateBarcodes ` --> to have the pipeline generate cell Barcodes, given that there were no barcodes provided <br />
 ` --[alignment] ` --> (Must provide this option or pipeline will halt!) either type '--bowtie2', '--bwa', '--tophat2', or '--hisat2' <br />
 
-Notes: Making barcodes functionality is configured to produce a set number of barcodes. <br /> 
-This number can be adjusted in pyscript.py. STAR index building and alignment
-are yet to be configured. <br />
+Notes: Making barcodes functionality uses the python package sircel, whose source code is slightly modified. The following code in split_reads.py is commented out to delay demultiplexing to later in the pipeline.
+
+`print('Splitting reads by cell')
+	output_files['split'] = write_split_fastqs(
+		(reads_assigned_db,
+		reads_assigned_pipe,
+		output_dir,
+		reads_unzipped,
+		barcodes_unzipped))`
+
+STAR index building and alignment are yet to be configured. <br />
 
 For any questions, please feel free to reach out to pnpiano@gmail.com.
    
