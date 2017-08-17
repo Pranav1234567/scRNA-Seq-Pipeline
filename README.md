@@ -47,7 +47,7 @@ print('Splitting reads by cell')
 		barcodes_unzipped))
 ```
 
-STAR index building and alignment are yet to be configured. <br />
+Default location of the cell barcode/umi for barcode generation is given by the values in extractBarcodes.sh. STAR index building and alignment are yet to be configured. <br />
 
 For any questions, please feel free to reach out to pnpiano@gmail.com.
    

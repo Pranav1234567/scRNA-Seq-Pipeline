@@ -3,7 +3,8 @@
 ################ get variables from shyaml configuration file ######################
 
 BASE=$(cat config.yaml | shyaml get-value BASE)
-DATA=$(cat config.yaml | shyaml get-value DATA)
+READ1=$(cat config.yaml | shyaml get-value READ1)
+READ2=$(cat config.yaml | shyaml get-value READ2)
 ADAPTERS=$(cat config.yaml | shyaml get-value ADAPTERS)
 REF=$(cat config.yaml | shyaml get-value REF)
 GENOME=$(cat config.yaml | shyaml get-value GENOME)
@@ -48,8 +49,6 @@ then
 else
 	if [  ${#no_build_reqs[@]} -lt  ${#args[@]} ]
 	then
-
-		build="yes"
 		
 		mkdir ${BASE}/Reference
         	INDEX=${BASE}/Reference/Indexes
@@ -65,8 +64,6 @@ else
 		fi
 
 	else
-		build="no"
-
 		INDEX=${REF}/Sequence
         	GENES_DIR=${REF}/Annotation/Genes
 
@@ -83,6 +80,6 @@ else
 
 	#./preprocessing.sh </path/to/project - where user wants project to exist> </path/to/Data> <path/to/Index files> <path/to/Genes Directory> <path/to/adapters> <alignment type> <barcode option>
 
-	./preprocessing.sh ${BASE} ${DATA} ${INDEX} ${GENES_DIR} ${ADAPTERS} ${align_reqs[0]} ${barcode_option}
+	./preprocessing.sh ${BASE} ${READ1} ${READ2} ${INDEX} ${GENES_DIR} ${ADAPTERS} ${align_reqs[0]} ${barcode_option}
 
 fi	

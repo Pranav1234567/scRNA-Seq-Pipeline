@@ -1,5 +1,6 @@
 BASE: /Users/Pranav/Documents/scripts
-DATA: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546.sra
+READ1: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546_1.fastq
+READ2: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546_2.fastq
 ADAPTERS: /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa
 REF: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10
 GENOME: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa

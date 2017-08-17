@@ -18,24 +18,21 @@ echo "-----------------------------------------"
 		
 	mkdir ${PREPROC} ${RAW} ${QC} ${INFO} ${DEMUX} ${TRIM} ${ALIGN} ${COUNTS}
 
-	#Once directories are created, we can take in the input data, convert to FASTQ and generate quality reports
-        	rawname=`echo $2 | cut -f1 -d'.'`
-		echo "--------------------------------------"
-        	echo "Making two FASTQ files from SRA..."
-        	echo "----------------------------------"
-               	fastq-dump -O ${RAW} -I --split-files $2
-                echo "----------------------------------"
-                echo "DONE making two FASTQ files from SRA"
+	#Once directories are created, we can take in the input data as 2 FASTQ files, move them to appropriate locations and generate quality reports
+		rawname=`echo $2 | cut -f1 -d'.'`
+		rawname=${rawname::${#rawname}-2}
+		cp $2 ${RAW}/
+		cp $3 ${RAW}/
                 #echo "------------------------------------"
                 #echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
 		#echo "------------------------------------"
 		#mkdir ${QC}/original/
-        	#fastqc --threads 8 ${rawname}_1.fastq -o ${QC}/original
+        	#fastqc --threads 8 ${RAW}/${rawname}_1.fastq -o ${QC}/original
         	#echo "-----------------------------------------"
-        	#fastqc --threads 8 ${rawname}_2.fastq -o ${QC}/original
+        	#fastqc --threads 8 ${RAW}/${rawname}_2.fastq -o ${QC}/original
         	#echo "DONE generating quality control reports using FASTQC"
 		echo "---------------------------------------"
-	if [ "$7" = "" ]
+	if [ "$8" = "" ]
 	then
 	#Make Barcode File
 		chmod 777 extractBarcodes.sh
@@ -45,7 +42,7 @@ echo "-----------------------------------------"
 		echo "-------------------------------------"	
 		echo "DONE making barcode file"
 	else
-		cp $7 ${INFO}/barcodes.tab
+		cp $8 ${INFO}/barcodes.tab
 		echo "copied file to INFO directory"
 	fi
 	echo "-----------------------------------"
@@ -73,7 +70,7 @@ echo "-----------------------------------------"
 		echo "Starting to remove adapter sequences..."
 		mkdir ${TRIM}/$(basename ${rawname}_1)/
         	mkdir ${TRIM}/$(basename ${rawname}_2)/
-		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} ${5} $NUMCELLS 				
+		./removeAdapters.sh ${DEMUX} ${TRIM} ${rawname} ${6} $NUMCELLS 				
 		echo "DONE removing adapter sequences"
 		echo "--------------------------------------"
 	: '
@@ -85,5 +82,5 @@ echo "-----------------------------------------"
 
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
-		./alignment.sh ${TRIM} ${3} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS ${4} ${6}
+		./alignment.sh ${TRIM} ${4} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS ${5} ${7}
 	

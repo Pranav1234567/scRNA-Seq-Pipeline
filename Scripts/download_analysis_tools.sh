@@ -43,3 +43,6 @@ pip install HTSeq
 
 #shyaml 
 pip install shyaml
+
+#sircel - make sure you have python 3 installed
+pip install sircel

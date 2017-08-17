@@ -4,7 +4,10 @@
 #${2} = ${DEMUX}
 #${3} = ${rawname}
 #${4} = ${INFO}
- for f in $(ls ${1}/SRR*_1.fastq)
+
+gunzip ${1}/*.gz
+
+for f in $(ls ${1}/SRR*_1.fastq)
  	do
  	for g in $(ls ${1}/SRR*_2.fastq)
         do

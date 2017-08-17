@@ -1,22 +1,17 @@
 #!/bin/bash
 
-for f in $(ls ${2}/SRR*_1.fastq)
+gzip ${2}/*.fastq
+
+for f in $(ls ${2}/SRR*_1.fastq.gz)
 do
-	CUTNUM=8
-
-	cut -c1-${CUTNUM} ${f} > temp.txt
-	awk 'NR % 4 == 2' temp.txt > temp2.txt
-
-	#An approximate number needed here
-	NUMBARCODES=96
-
-	./pyscript.py temp2.txt $NUMBARCODES >> python_out.txt
-
-	grep -o "'[^']*'" python_out.txt > onlySeq_python_out.txt
-	awk '{print substr($0, 2, length($0)-2)}' onlySeq_python_out.txt > noQuotes_python_out.txt
-	cat -n noQuotes_python_out.txt > ${1}/barcodes.tab
-
-	rm noQuotes_python_out.txt onlySeq_python_out.txt python_out.txt temp.txt                      
+	for g in $(ls ${2}/SRR*_2.fastq.gz)
+	do
+		#brew services restart redis
+		python3 -m sircel --threads 8 --output_dir ${1} --reads ${g} --barcodes ${f} --barcode_start 0 --barcode_end 8 --umi_start 8 --umi_end 12
+	done
 done
 
-rm temp2.txt
+awk '{print $1}' ${1}/threshold_paths.txt > ${1}/barcodes.txt
+cat -n ${1}/barcodes.txt > ${1}/barcodes.tab
+rm ${1}/barcodes.txt
+
