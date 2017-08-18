@@ -97,7 +97,7 @@ print('Splitting reads by cell')
 		barcodes_unzipped))
 ```
 
-Quality Control reports can be produced by uncommenting the following segments of code 
+Quality Control reports can be produced by uncommenting the following segments of code in Scripts/preprocessing.sh
 
 ```
 #echo "------------------------------------"
