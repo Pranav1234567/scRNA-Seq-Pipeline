@@ -6,7 +6,7 @@ Layout of directories created:
 
 ```
 ├── Base Directory (location of project results)
-	├── Preprocess
+	├── Preprocess_(current date and time)
 		├── Raw
 			├── SRR***_1.fastq 
 			├── SRR***_2.fastq
