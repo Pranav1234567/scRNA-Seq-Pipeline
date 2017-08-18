@@ -1,8 +1,27 @@
+##################### Please input the correct directories for the following ###########################
+
+##### BASE Directory where your project will reside #####
+
 BASE: /Users/Pranav/Documents/scripts
-READ1: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546_1.fastq
-READ2: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546_2.fastq
+
+##### FASTQ files #######
+
+FASTQ1: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546_1.fastq
+FASTQ2: /Users/Pranav/Documents/Research/AnalysisResults/Raw/SRR3106546_2.fastq
+
+#### Adapter sequences FASTA ######
+
 ADAPTERS: /Users/Pranav/Documents/Research/AnalysisResults/adapters.fa
+
+#### Location of Indexes and Genes folders containing both the Alignment Index files and genes GFF/GTF (not building Indexes) ########
+
 REF: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10
-GENOME: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa
-GENES: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf
+
+#### Location of genome FASTA and Genes GTF for building Indexes #### 
+
+GENOME: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Indexes/genome.fa
+GENES: /Users/Pranav/Documents/Research/AnalysisResults/Reference/Mus_musculus_UCSC_mm10/Mus_musculus/UCSC/mm10/Genes/genes.gtf
+
+#### Location of barcode file (not generating barcodes) each row must be of the form  <idx> <barcode_sequence> ####
+
 BARCODES: /Users/Pranav/Documents/Research/AnalysisResults/Demux/GSE76983_cel-seq_barcodes.csv

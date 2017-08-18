@@ -37,6 +37,16 @@ Layout of directories created:
 			├── GFF/GTF file
 		├── Indexes
 			├── Index folder (i.e. ‘Bowtie2Index’ contains all the Index files)
+
+
+Some External location 
+
+├── Reference (not building indexes)
+	├── Genes
+        	├── GFF/GTF file
+        ├── Indexes
+                ├── Index folder (i.e. ‘Bowtie2Index’ contains all the Index files)
+
 ```
 
 ### Installation
@@ -73,17 +83,6 @@ modify the config.yaml script by opening it in a text editor, changing the direc
 ` --[alignment] ` --> (Must provide this option or pipeline will halt!) either type '--bowtie2', '--bwa', '--tophat2', '--STAR' or '--hisat2' <br />
 
 Notes: 
-
-When not building indexes, make sure the REF variable in config.yaml points to a directory that is structured like so:
-
-```
-REF 
-├── Sequence
-	├── Index folder (containing all the indexes, i.e. 'Bowtie2Index')               
-├── Annotation
-	├── Genes
-		├── GTF/GFF file
-```
 
 Making barcodes functionality uses the python package sircel, whose source code is slightly modified. The following code in split_reads.py is commented out to delay demultiplexing to later in the pipeline.
 
@@ -134,4 +133,3 @@ Default location of the cell barcode/umi for barcode generation is given by the 
 STAR index building and alignment are yet to be configured. <br />
 
 For any questions, please feel free to reach out to pnpiano@gmail.com.
-   

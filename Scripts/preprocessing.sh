@@ -87,3 +87,9 @@ echo "--------------------------------------"
 		chmod 777 alignment.sh
 		./alignment.sh ${TRIM} ${4} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS ${5} ${7}
 	
+	#(If barcodes generated) Relocation of barcodes for reuse
+		if [ "$8" = "" ]
+		then
+			mv ${INFO}/barcodes.tab ${BASE}
+		fi
+		
