@@ -1,12 +1,16 @@
 #!/bin/bash
 
 echo "Welcome "$USER", to this BASH script on PREPROCESSING scRNA-Seq Data"
-echo "-----------------------------------------"
+echo "--------------------------------------"
 
 	#Predefined by user
 	BASE=$1
 
-	PREPROC=${BASE}/Preprocess
+	today=`date +%m-%d-%Y.%H:%M:%S`
+
+	Preprocess="Preprocess_$today"
+
+	PREPROC=${BASE}/$Preprocess
 
 	RAW=${PREPROC}/Raw
 	QC=${PREPROC}/QC
@@ -36,7 +40,6 @@ echo "-----------------------------------------"
 	then
 	#Make Barcode File
 		chmod 777 extractBarcodes.sh
-		echo "--------------------------------------"
 		echo "Making Barcode file..."
 		./extractBarcodes.sh ${INFO} ${RAW}
 		echo "-------------------------------------"	
