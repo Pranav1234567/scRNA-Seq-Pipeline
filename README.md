@@ -27,15 +27,25 @@ Once you have downloaded these tools, you can download/clone the repo.
 ### Usage
 
 In order to run the pipeline,
-modify the config.yaml script by opening it in a text editor, changing the directories listed. Then, in the command-line run this script by typing ./run.sh [options].
+modify the config.yaml script by opening it in a text editor, changing the directories listed. If you opt for generating barcodes, make sure the redis server is running. Then, in the command-line run this script by typing ./run.sh [options].
 
 ### Options
 
 ` --build ` --> to build alignment index files (default is to input index files) <br /> 
 ` --generateBarcodes ` --> to have the pipeline generate cell Barcodes, given that there were no barcodes provided <br />
-` --[alignment] ` --> (Must provide this option or pipeline will halt!) either type '--bowtie2', '--bwa', '--tophat2', or '--hisat2' <br />
+` --[alignment] ` --> (Must provide this option or pipeline will halt!) either type '--bowtie2', '--bwa', '--tophat2', '--STAR' or '--hisat2' <br />
 
 Notes: Making barcodes functionality uses the python package sircel, whose source code is slightly modified. The following code in split_reads.py is commented out to delay demultiplexing to later in the pipeline.
+When not building indexes, make sure the REF variable in config.yaml points to a directory that is structured like so:
+
+```
+REF
+├── Sequence
+	├── (Alignment Index folder containing all the indexes, i.e. 'Bowtie2Index')               
+├── Annotation
+	├── Genes
+		├── (GTF/GFF file)
+```
 
 ```python
 print('Splitting reads by cell')
