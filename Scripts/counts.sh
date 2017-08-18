@@ -21,11 +21,11 @@ echo "DONE"
 
 #Removes the last 5 lines of each counts file
 chmod 777 cutlines.sh
-./cutlines.sh ${4} ${3} ${5} 
+./cutlines.sh ${4} ${3} ${5} ${6}
 
 #Converts the counts files into one big matrix text file
 chmod 777 combineCol.sh
-./combineCol.sh ${4} ${3}
+./combineCol.sh ${4} ${3} ${6}
 
 #Converts big matrix text file into csv
 

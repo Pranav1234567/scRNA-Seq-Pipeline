@@ -15,7 +15,7 @@ cd ${1}/${2}
 
 i=1
 STRING="GENEID"
-while((i<=$NUMCELLS))
+while((i<=$3))
 do
 	g="counts_cell$i.txt"
         	if [ -s $g ]	
