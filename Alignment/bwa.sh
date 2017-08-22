@@ -24,9 +24,9 @@ do
 	done
 		samtools view -bS ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/output.bam 
                 bamtools stats -in ${4}/bwa/cell$i/output.bam > ${4}/bwa/cell$i/alignment_summary.txt
-		samtools flagstat ${4}/bwa/cell$i/output.bam > ${4}/bwa/cell$i/flagstats.txt
-		samtools view -b -F 4 ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/mapped.bam
-                samtools view -b -f 4 ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/unmapped.bam
+		#samtools flagstat ${4}/bwa/cell$i/output.bam > ${4}/bwa/cell$i/flagstats.txt
+		#samtools view -b -F 4 ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/mapped.bam
+                #samtools view -b -f 4 ${4}/bwa/cell$i/output.sam > ${4}/bwa/cell$i/unmapped.bam
                 samtools sort -n --threads 8 -o ${4}/bwa/cell$i/sorted_output.bam ${4}/bwa/cell$i/output.bam
 		rm ${4}/bwa/cell$i/output.sam
                 echo "outputted all the bam files"

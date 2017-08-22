@@ -25,8 +25,8 @@ echo "--------------------------------------"
 	#Once directories are created, we can take in the input data as 2 FASTQ files, move them to appropriate locations and generate quality reports
 		rawname=`echo $2 | cut -f1 -d'.'`
 		rawname=${rawname::${#rawname}-2}
-		cp $2 ${RAW}/
-		cp $3 ${RAW}/
+		ln -s $2 ${RAW}/
+		ln -s $3 ${RAW}/
                 #echo "------------------------------------"
                 #echo "Generating quality control reports (2 FASTQ files) using FASTQC..."
 		#echo "------------------------------------"
@@ -83,10 +83,16 @@ echo "--------------------------------------"
                 ./trimDemuxQC.sh ${TRIM} ${rawname} ${QC}/trim $NUMCELLS
 	'
 
+	# Reduce storage
+	 rm ${DEMUX}
+	
 	#Alignment to the Genome and counts
 		chmod 777 alignment.sh
 		./alignment.sh ${TRIM} ${4} ${rawname} ${ALIGN} ${INFO} ${COUNTS} $NUMCELLS ${5} ${7}
 	
+	# Reduce storage
+	 rm ${TRIM}
+
 	#(If barcodes generated) Relocation of barcodes for reuse
 		if [ "$8" = "" ]
 		then

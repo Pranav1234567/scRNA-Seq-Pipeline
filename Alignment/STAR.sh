@@ -24,8 +24,8 @@ do
 		STAR --runThreadN 8 --runMode alignReads --genomeDir ${2}/STARIndex/ --sjdbGTFfile ${8}/genes.gtf --readFilesIn ${f} --outFileNamePrefix output STAR_alignment --outTmpDir ${4}/STAR/ --outStd BAM_Unsorted --outSAMtype BAM Unsorted --outSAMunmapped Within KeepPairs --outBAMcompression 0 --bamRemoveDuplicatesType UniqueIdentical --quantMode GeneCounts    
 		echo "DONE"
                 bamtools stats -in ${4}/STAR/cell$i/output.bam > ${4}/STAR/cell$i/align_summary.txt
-                samtools view -b -F 4 ${4}/STAR/cell$i/output.sam > ${4}/STAR/cell$i/mapped.bam
-                samtools view -b -f 4 ${4}/STAR/cell$i/output.sam > ${4}/STAR/cell$i/unmapped.bam
+                #samtools view -b -F 4 ${4}/STAR/cell$i/output.sam > ${4}/STAR/cell$i/mapped.bam
+                #samtools view -b -f 4 ${4}/STAR/cell$i/output.sam > ${4}/STAR/cell$i/unmapped.bam
                 samtools sort -n --threads 8 -o ${4}/STAR/cell$i/sorted_output.bam ${4}/STAR/cell$i/output.bam
                 rm ${4}/STAR/cell$i/output.sam
                 echo "outputted all the bam files"
