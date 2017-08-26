@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #$1 = ${ALIGN}
-#$2 = ${REF}
+#$2 = ${INDEX}
 #$3 = which alignment name
 #$4 = ${COUNTS}
 #$5 = ${INFO}

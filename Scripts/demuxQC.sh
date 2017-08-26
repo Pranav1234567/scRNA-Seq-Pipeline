@@ -1,35 +1,33 @@
 #!/bin/bash
 
 #${1} = ${DEMUX}
-#${2} = ${rawname}
-#${3} = ${QC}/demux
-#$4 = number of cells = # lines in the barcode file
+#${2} = ${QC}/demux
+#$3 = number of cells = # lines in the barcode file
+
 echo "Generating quality control reports (Demuxed Cells) using FASTQC..."
 
 i=1
 
-mkdir ${3}/$(basename ${2}_1)
-mkdir ${3}/$(basename ${2}_2)
+mkdir ${2}/Read1
+mkdir ${2}/Read2
 
-NUMCELLS=$4
-
-while ((i<=$NUMCELLS))
+while (($i<=$3))
 do
 
-	for f in $(ls ${1}/$(basename ${2}_1)/cell.$i.fastq) 
+	for f in $(ls ${1}/Read1/cell.$i.fastq) 
 	do
 		echo "------------------------------------"
-                mkdir ${3}/$(basename ${2}_1)/cell$i
-		fastqc --threads 8 ${f} -o ${3}/$(basename ${2}_1)/cell$i
+                mkdir ${2}/Read1/cell$i
+		fastqc --threads 8 ${f} -o ${2}/Read1/cell$i
                 echo "-----------------------------------------"
                 echo "DONE"
 	done
 
-	 for f in $(ls ${1}/$(basename ${2}_2)/cell.$i.fastq)
+	for f in $(ls ${1}/Read2/cell.$i.fastq)
 	do
                 echo "------------------------------------"
-		mkdir ${3}/$(basename ${2}_2)/cell$i
-                fastqc --threads 8 ${f} -o ${3}/$(basename ${2}_2)/cell$i          
+		mkdir ${2}/Read2/cell$i
+                fastqc --threads 8 ${f} -o ${2}/Read2/cell$i          
                 echo "-----------------------------------------"
                 echo "DONE"
 	done

@@ -1,35 +1,32 @@
 #!/bin/bash
 
 #${1} = ${TRIM}
-#${2} = ${rawname}
-#${3} = ${QC}/trim
-#${4} = $NUMCELLS
+#${2} = ${QC}/trim
+#${3} = $NUMCELLS
 echo "Generating quality control reports (Trimmed and Demuxed Cells) using FASTQC..."
 
 i=1
 
-mkdir ${3}/$(basename ${2}_1)
-mkdir ${3}/$(basename ${2}_2)
+mkdir ${2}/Read1
+mkdir ${2}/Read2
 
-NUMCELLS=$4
-
-while ((i<=$NUMCELLS))
+while ((i<=$3))
 do
 
-	for f in $(ls ${1}/$(basename ${2}_1)/trimCell.$i.fastq) 
+	for f in $(ls ${1}/Read1/trimCell.$i.fastq) 
 	do
 		echo "------------------------------------"
-                mkdir ${3}/$(basename ${2}_1)/trimCell$i
-		fastqc --threads 8 ${f} -o ${3}/$(basename ${2}_1)/trimCell$i
+                mkdir ${2}/Read1/trimCell$i
+		fastqc --threads 8 ${f} -o ${2}/Read1/trimCell$i
                 echo "-----------------------------------------"
                 echo "DONE"
 	done
 
-	 for f in $(ls ${1}/$(basename ${2}_2)/trimCell.$i.fastq)
+	for f in $(ls ${1}/Read2/trimCell.$i.fastq)
 	do
                 echo "------------------------------------"
-		mkdir ${3}/$(basename ${2}_2)/trimCell$i
-                fastqc --threads 8 ${f} -o ${3}/$(basename ${2}_2)/trimCell$i      
+		mkdir ${2}/Read2/trimCell$i
+                fastqc --threads 8 ${f} -o ${2}/Read2/trimCell$i      
                 echo "-----------------------------------------"
                 echo "DONE"
 	done

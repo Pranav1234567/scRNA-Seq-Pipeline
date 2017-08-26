@@ -2,18 +2,11 @@
 
 #${1} = ${RAW}
 #${2} = ${DEMUX}
-#${3} = ${rawname}
-#${4} = ${INFO}
+#${3} = ${INFO}
+#${4} = ${rawname_1}
+#${5} = ${rawname_2}
 
-gunzip ${1}/*.gz
-
-for f in $(ls ${1}/SRR*_1.fastq)
- 	do
- 	for g in $(ls ${1}/SRR*_2.fastq)
-        do
-        	mkdir ${2}/$(basename ${3}_1)/
-                mkdir ${2}/$(basename ${3}_2)/
-                echo "Starting to demultiplex cells..."
-                fastq-multx ${4}/barcodes.tab ${f} ${g} -o ${2}/$(basename ${3}_1)/cell.%.fastq ${2}/$(basename ${3}_2)/cell.%.fastq
-        done
- done
+mkdir ${2}/Read1/
+mkdir ${2}/Read2/
+echo "Starting to demultiplex cells..."
+fastq-multx ${3}/barcodes.tab ${1}/${4} ${1}/${5} -o ${2}/Read1/cell.%.fastq ${2}/Read2/cell.%.fastq

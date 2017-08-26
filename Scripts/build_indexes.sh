@@ -14,7 +14,7 @@ then
 	cd ${1}/Indexes/Bowtie2Index
 	ln -s $2 ${1}/Indexes/Bowtie2Index/genome.fa
 	ln -s $3 ${1}/Genes/
-	bowtie2-build --threads 8 ${1}/Indexes/Bowtie2Index/genome.fa genome
+	bowtie2-build ${1}/Indexes/Bowtie2Index/genome.fa genome
 	cd ../../.. 
 elif [ "$4" = "--bwa" ]
 then
