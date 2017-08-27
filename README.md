@@ -8,18 +8,18 @@ Layout of directories created:
 ├── Base Directory (location of project results)
 	├── Preprocess_(current date and time)
 		├── Raw
-			├── SRR***_1.fastq 
-			├── SRR***_2.fastq
+			├── FASTQ1 
+			├── FASTQ2
 		├── QC
 			├── Original (QC for original FASTQs)
 			├── Demux (QC for demultiplexed reads)
 			├── Trimmed and Demuxed (QC for trimmed and demultiplexed reads)
 		├── Info
 			├── Sircel Output (extra file barcodes.tab for demultiplexing)
-		├── Demux
+		├── Demux (removed near the end)
 			├── folder containing FASTQ file 1, demultiplexed
 			├── folder containing FASTQ file 2, demultiplexed
-		├── Trim
+		├── Trim (removed near the end)
 			├── folder containing FASTQ file 1, demultiplexed and trimmed
 			├── folder containing FASTQ file 2, demultiplexed and trimmed
 		├── Align
@@ -30,7 +30,6 @@ Layout of directories created:
 				.
 		├── Counts
 			├── folder (i.e. ‘bowtie2’ or other alignment procedure)
-				├── counts for each cell (txt files)
 				├── GeneExpressionMatrix.csv
 	├── Reference (if building Indexes)
 		├── Genes

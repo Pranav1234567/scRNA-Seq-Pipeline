@@ -26,3 +26,8 @@ do
 done
 
 sed -i.bak "1 s/^.*$/$STRING/" GeneExpressionMatrix.csv
+
+rm counts_cell*.txt
+rm matrix*.txt
+rm GeneExpressionMatrix.csv.bak
+rm sample.csv
