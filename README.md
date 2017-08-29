@@ -73,7 +73,7 @@ Once you have downloaded these tools, you can download/clone the repo.
 ### Usage
 
 In order to run the pipeline,
-modify the config.yaml script by opening it in a text editor, changing the directories listed. If you opt for generating barcodes, make sure the redis server is running. Then, in the command-line run this script by typing ./run.sh [options].
+modify the config.yaml script by opening it in a text editor, changing the directories listed. If you opt for generating barcodes, make sure you change the location of the cell barcode/umi values in extractBarcodes.sh and the redis server is running. Then, in the command-line run this script by typing ./run.sh [options].
 
 ### Options
 
@@ -126,9 +126,5 @@ Quality Control reports can be produced by uncommenting the following segments o
                 ./trimDemuxQC.sh ${TRIM} ${rawname} ${QC}/trim $NUMCELLS
         '
 ```
-
-Default location of the cell barcode/umi for barcode generation is given by the values in extractBarcodes.sh. 
-
-STAR index building and alignment are yet to be configured. <br />
 
 For any questions, please feel free to reach out to pnpiano@gmail.com.
