@@ -73,7 +73,7 @@ Once you have downloaded these tools, you can download/clone the repo.
 ### Usage
 
 In order to run the pipeline,
-modify the config.yaml script by opening it in a text editor, changing the directories listed. If you opt for generating barcodes, make sure you change the location of the cell barcode/umi values in extractBarcodes.sh and the redis server is running. Then, in the command-line run this script by typing ./run.sh [options].
+modify the config.yaml script by opening it in a text editor, changing the directories/files listed. The adapter FASTA can be written in any text editor if it is not available. If you opt for generating barcodes, make sure you change the location of the cell barcode/umi values in extractBarcodes.sh and the redis server is running. Then, in the command-line run this script by typing ./run.sh [options].
 
 ### Options
 
